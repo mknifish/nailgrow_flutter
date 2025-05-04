@@ -41,11 +41,15 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: _currentIndex == 1 ? Color(0xFFFFCDC5) : AppTheme.primaryColor,
       ),
       body: _pages[_currentIndex],
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _currentIndex,
         onTap: _onTabTapped,
+        backgroundColor: _currentIndex == 1 ? Color(0xFFFFCDC5) : AppTheme.primaryColor,
+        selectedItemColor: _currentIndex == 1 ? Color(0xFFE0E5EC) : AppTheme.accentColor,
+        unselectedItemColor: AppTheme.shadowDarkColor,
         items: [
           BottomNavigationBarItem(
             icon: Icon(Icons.home),

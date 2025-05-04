@@ -10,7 +10,7 @@ class DataScreen extends StatelessWidget {
         return Scaffold(
           appBar: AppBar(
             title: Text(''), // AppBarのタイトルを削除
-            backgroundColor: Theme.of(context).primaryColor, // カスタム背景色
+            backgroundColor: Color(0xFFFFCDC5), // 直接色を指定
           ),
           body: Center(
             child: Container(

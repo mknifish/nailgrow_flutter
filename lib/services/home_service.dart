@@ -23,34 +23,26 @@ class HomeService {
   }
 
   Future<void> handleWinButtonPressed(BuildContext context, int? targetDays, int achievedDays) async {
+    await _progressService.updateAchievedDays(context);
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    achievedDays = DateTime.now().difference((await _progressService.preferencesService.getGoalSetDate())!).inDays; // 修正ポイント
+    achievedDays = achievedDays < 0 ? 0 : achievedDays;
     if (achievedDays >= (targetDays ?? 0)) {
       await _progressService.incrementAchievedGoals();
       Provider.of<DataProvider>(context, listen: false).loadAchievedGoals();
+      await _progressService.resetAchievedDays(context);
+      Provider.of<ProgressProvider>(context, listen: false).loadProgress();
 
       await _dialogService.showWinDialog(context, () async {
-        await showDialog(
-          context: context,
-          barrierDismissible: false,
-          builder: (BuildContext context) {
-            return Dialog(
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  AppBar(
-                    automaticallyImplyLeading: false,
-                    title: Text('Data Screen'),
-                  ),
-                  Expanded(
-                    child: DataScreen(),
-                  ),
-                ],
-              ),
-            );
-          },
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+            builder: (context) => DataScreen(),
+          ),
         );
       });
     } else {
-      Provider.of<ProgressProvider>(context, listen: false).loadProgress();
+      Provider.of<ProgressProvider>(context, listen: false).loadProgress(); // ProgressProviderのインポートに対応
     }
   }
 

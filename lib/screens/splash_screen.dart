@@ -19,10 +19,10 @@ class SplashScreen extends StatelessWidget {
                 ),
               ),
               SizedBox(height: 20), // テキストとアイコンの間にスペースを追加
-              Icon(
-                Icons.circle,
-                size: 50, // アイコンのサイズを指定
-                color: Colors.white,
+              Image.asset(
+                'assets/img/icon_white.png',
+                width: 50,
+                height: 50,
               ),
             ],
           ),

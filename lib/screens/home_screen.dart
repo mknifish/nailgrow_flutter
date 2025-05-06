@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:nailgrow_mobile_app_dev/services/home_service.dart';
 import 'package:nailgrow_mobile_app_dev/state/progress_provider.dart';
+import 'set_goal_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -38,6 +39,27 @@ class _HomeScreenState extends State<HomeScreen> {
 
         return Scaffold(
           backgroundColor: Color(0xFFE0E5EC),
+          appBar: AppBar(
+            backgroundColor: Color(0xFFE0E5EC),
+            elevation: 0,
+            automaticallyImplyLeading: false,
+            actions: [
+              Padding(
+                padding: const EdgeInsets.only(right: 16.0),
+                child: _buildNeumorphicIconButton(
+                  icon: Icons.settings,
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => SetGoalScreen(isFirstTime: false),
+                      ),
+                    );
+                  },
+                ),
+              ),
+            ],
+          ),
           body: Center(
             child: Padding(
               padding: const EdgeInsets.all(16.0),
@@ -179,6 +201,43 @@ Widget _buildProgressIndicator(ProgressProvider progressProvider, double progres
           },
         ),
       ],
+    );
+  }
+
+  Widget _buildNeumorphicIconButton({
+    required IconData icon,
+    required VoidCallback onPressed,
+    Color? color,
+  }) {
+    return GestureDetector(
+      onTap: onPressed,
+      child: Container(
+        width: 40,
+        height: 40,
+        decoration: BoxDecoration(
+          color: Color(0xFFE0E5EC),
+          shape: BoxShape.circle,
+          boxShadow: [
+            BoxShadow(
+              color: Colors.white,
+              offset: Offset(-3, -3),
+              blurRadius: 6,
+            ),
+            BoxShadow(
+              color: Colors.black.withOpacity(0.2),
+              offset: Offset(3, 3),
+              blurRadius: 6,
+            ),
+          ],
+        ),
+        child: Center(
+          child: Icon(
+            icon,
+            size: 20,
+            color: color ?? Colors.grey[700],
+          ),
+        ),
+      ),
     );
   }
 

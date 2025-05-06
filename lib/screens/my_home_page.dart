@@ -52,12 +52,24 @@ class _MyHomePageState extends State<MyHomePage> {
         unselectedItemColor: AppTheme.shadowDarkColor,
         items: [
           BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Home',
+            icon: Icon(
+              Icons.data_usage,
+              color: _currentIndex == 0 ? Color(0xFFF09182) : AppTheme.shadowDarkColor,
+            ),
+            label: '',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.data_usage),
-            label: 'Data',
+            icon: Image.asset(
+              'assets/img/icon_gray.png',
+              width: 24,
+              height: 24,
+            ),
+            activeIcon: Image.asset(
+              'assets/img/icon_white.png',
+              width: 24,
+              height: 24,
+            ),
+            label: '',
           ),
         ],
       ),

@@ -4,19 +4,21 @@ class DialogService {
   Future<void> showWinDialog(BuildContext context, VoidCallback onConfirm) async {
     await showDialog<void>(
       context: context,
+      barrierDismissible: false,
       builder: (BuildContext context) {
-        return AlertDialog(
-          title: Text('Congratulations!'),
-          content: Text('You have achieved your goal!'),
-          actions: <Widget>[
-            TextButton(
-              child: Text('OK'),
-              onPressed: () {
-                Navigator.of(context).pop();
-                onConfirm();
-              },
+        return GestureDetector(
+          onTap: () {
+            Navigator.of(context).pop();
+            onConfirm();
+          },
+          child: Dialog(
+            backgroundColor: Colors.transparent,
+            elevation: 0,
+            child: Image.asset(
+              'assets/img/nag_tassei.png',
+              fit: BoxFit.contain,
             ),
-          ],
+          ),
         );
       },
     );
@@ -25,19 +27,21 @@ class DialogService {
   Future<void> showLoseDialog(BuildContext context, VoidCallback onConfirm) async {
     await showDialog<void>(
       context: context,
+      barrierDismissible: false,
       builder: (BuildContext context) {
-        return AlertDialog(
-          title: Text('Try Again'),
-          content: Text('You have not achieved your goal.'),
-          actions: <Widget>[
-            TextButton(
-              child: Text('OK'),
-              onPressed: () {
-                Navigator.of(context).pop();
-                onConfirm();
-              },
+        return GestureDetector(
+          onTap: () {
+            Navigator.of(context).pop();
+            onConfirm();
+          },
+          child: Dialog(
+            backgroundColor: Colors.transparent,
+            elevation: 0,
+            child: Image.asset(
+              'assets/img/nag_futassei.png',
+              fit: BoxFit.contain,
             ),
-          ],
+          ),
         );
       },
     );

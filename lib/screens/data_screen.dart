@@ -25,9 +25,10 @@ class DataScreen extends StatelessWidget {
                       spacing: 10.0,
                       runSpacing: 10.0,
                       children: List.generate(dataProvider.achievedGoals, (index) {
-                        return CircleAvatar(
-                          radius: 15,
-                          backgroundColor: Colors.white, // CircleAvatarの背景色を白に変更
+                        return Image.asset(
+                          'assets/img/icon_white.png',
+                          width: 30,
+                          height: 30,
                         );
                       }),
                     ),

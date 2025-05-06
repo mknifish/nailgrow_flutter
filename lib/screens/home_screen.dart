@@ -163,7 +163,7 @@ Widget _buildProgressIndicator(ProgressProvider progressProvider, double progres
 
   Widget _buildActionButtons(BuildContext context, ProgressProvider progressProvider) {
     return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
         _buildNeumorphicButton(
           label: 'WIN',
@@ -172,7 +172,6 @@ Widget _buildProgressIndicator(ProgressProvider progressProvider, double progres
           },
           color: Color(0xFFF09182),
         ),
-        SizedBox(width: 20),
         _buildNeumorphicButton(
           label: 'LOSE',
           onPressed: () async {

@@ -100,16 +100,16 @@ Widget _buildProgressIndicator(ProgressProvider progressProvider, double progres
     child: Stack(
       alignment: Alignment.center,
       children: [
-        // 外側のドーナツ（立体的）
+        // 外側のドーナツ（インセット・ニューモーフィズム）
         SizedBox(
           width: outerRadius,
           height: outerRadius,
           child: CustomPaint(
-            painter: NeumorphicDonutPainter(
+            painter: NeumorphicInsetDonutPainter(
               thickness: outerStrokeWidth,
               baseColor: Color(0xFFE0E5EC),
-              shadowColor: Colors.black.withOpacity(0.2),
-              highlightColor: Colors.white.withOpacity(0.8),
+              shadowColor: Colors.black,
+              highlightColor: Colors.white,
             ),
           ),
         ),
@@ -120,7 +120,7 @@ Widget _buildProgressIndicator(ProgressProvider progressProvider, double progres
           child: CustomPaint(
             painter: GradientProgressPainter(
               progress: progress.isFinite ? progress : 0.0,
-              backgroundColor: Color(0xFFD1D9E6), // トラックの背景色
+              backgroundColor: Color(0xFFD1D9E6), // トラックの背景色（元に戻す）
               gradient: LinearGradient(
                 colors: [Color.fromARGB(255, 245, 233, 224), Color.fromARGB(255, 241, 168, 165)], // 根本と先端の色
                 begin: Alignment.centerLeft,
@@ -437,13 +437,13 @@ class ThickDonutPainter extends CustomPainter {
   }
 }
 
-class NeumorphicDonutPainter extends CustomPainter {
+class NeumorphicInsetDonutPainter extends CustomPainter {
   final double thickness;
   final Color baseColor;
   final Color shadowColor;
   final Color highlightColor;
 
-  NeumorphicDonutPainter({
+  NeumorphicInsetDonutPainter({
     required this.thickness,
     required this.baseColor,
     required this.shadowColor,
@@ -452,52 +452,47 @@ class NeumorphicDonutPainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    final Paint basePaint = Paint()
-      ..color = baseColor
-      ..style = PaintingStyle.stroke
-      ..strokeWidth = thickness;
-
-    final Paint shadowPaint = Paint()
-      ..color = shadowColor
-      ..style = PaintingStyle.stroke
-      ..strokeWidth = thickness
-      ..maskFilter = MaskFilter.blur(BlurStyle.normal, 10); // シャドウをさらにぼかす
-
-    final Paint highlightPaint = Paint()
-      ..color = highlightColor
-      ..style = PaintingStyle.stroke
-      ..strokeWidth = thickness
-      ..maskFilter = MaskFilter.blur(BlurStyle.normal, 30); // ハイライトを強調
-
-    final Rect rect = Rect.fromCircle(
+    final rect = Rect.fromCircle(
       center: Offset(size.width / 2, size.height / 2),
       radius: size.width / 2 - thickness / 2,
     );
 
-    // シャドウを描画
-    canvas.drawArc(
-      rect,
-      3.14159 / 3, // シャドウ位置
-      2 * 3.14159, // 全周
-      false,
-      shadowPaint,
-    );
+    // 内側シャドウ
+    final shadowPaint = Paint()
+      ..shader = RadialGradient(
+        colors: [shadowColor.withOpacity(0.18), Colors.transparent],
+        stops: [0.7, 1.0],
+      ).createShader(rect)
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = thickness;
 
-    // ハイライトを描画
-    canvas.drawArc(
-      rect,
-      -3.14159 / 3, // ハイライト位置
-      2 * 3.14159, // 全周
-      false,
-      highlightPaint,
-    );
+    // 内側ハイライト
+    final highlightPaint = Paint()
+      ..shader = RadialGradient(
+        colors: [highlightColor.withOpacity(0.35), Colors.transparent],
+        stops: [0.0, 0.8],
+      ).createShader(rect)
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = thickness;
 
-    // ドーナツ本体を描画
+    // ベース
+    final basePaint = Paint()
+      ..color = baseColor
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = thickness;
+
+    // 1. ベース
     canvas.drawArc(rect, 0, 2 * 3.14159, false, basePaint);
+    // 2. シャドウ（下側）
+    canvas.saveLayer(rect, Paint());
+    canvas.drawArc(rect, 0, 2 * 3.14159, false, shadowPaint);
+    canvas.restore();
+    // 3. ハイライト（上側）
+    canvas.saveLayer(rect, Paint());
+    canvas.drawArc(rect, 0, 2 * 3.14159, false, highlightPaint);
+    canvas.restore();
   }
 
   @override
-  bool shouldRepaint(CustomPainter oldDelegate) {
-    return true;
-  }
+  bool shouldRepaint(CustomPainter oldDelegate) => false;
 }

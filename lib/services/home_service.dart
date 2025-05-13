@@ -6,7 +6,6 @@ import 'package:nailgrow_mobile_app_dev/state/progress_provider.dart'; // Progre
 import 'package:nailgrow_mobile_app_dev/screens/data_screen.dart';
 import 'package:nailgrow_mobile_app_dev/screens/set_goal_screen.dart';
 import 'package:provider/provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class HomeService {
   final DialogService _dialogService = DialogService();
@@ -24,7 +23,6 @@ class HomeService {
 
   Future<void> handleWinButtonPressed(BuildContext context, int? targetDays, int achievedDays) async {
     await _progressService.updateAchievedDays(context);
-    SharedPreferences prefs = await SharedPreferences.getInstance();
     achievedDays = DateTime.now().difference((await _progressService.preferencesService.getGoalSetDate())!).inDays; // 修正ポイント
     achievedDays = achievedDays < 0 ? 0 : achievedDays;
     if (achievedDays >= (targetDays ?? 0)) {

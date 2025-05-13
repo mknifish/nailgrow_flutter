@@ -34,155 +34,162 @@ class _HomeScreenState extends State<HomeScreen> {
     return Consumer<ProgressProvider>(
       builder: (context, progressProvider, child) {
         double progress = progressProvider.progress.progress;
-        // 残り日数を計算
         int remainingDays = (targetDays ?? 0) - achievedDays;
-
         return Scaffold(
           backgroundColor: Color(0xFFE0E5EC),
-          appBar: AppBar(
-            backgroundColor: Color(0xFFE0E5EC),
-            elevation: 0,
-            automaticallyImplyLeading: false,
-            actions: [
-              Padding(
-                padding: const EdgeInsets.only(right: 16.0),
-                child: _buildNeumorphicIconButton(
-                  icon: Icons.settings,
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => SetGoalScreen(isFirstTime: false),
-                      ),
-                    );
-                  },
-                ),
-              ),
-            ],
-          ),
-          body: Center(
-            child: Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  _buildProgressIndicator(progressProvider, progress),
-                  SizedBox(height: 20),
-                  _buildActionButtons(context, progressProvider),
-                  SizedBox(height: 20),
-                  Text(
-                    '目標達成に向けて、残り$remainingDays 日間頑張りましょう！',
-                    style: TextStyle(
-                      fontSize: 14, // 文字サイズを半分程度に調整
-                      fontWeight: FontWeight.bold,
-                      color: Colors.grey[700],
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
+          appBar: _buildAppBar(context),
+          body: _buildBody(context, progressProvider, progress, remainingDays),
         );
       },
     );
   }
 
-Widget _buildProgressIndicator(ProgressProvider progressProvider, double progress) {
-  const double outerRadius = 300; // 外側円の直径（1.5倍に拡大）
-  const double outerStrokeWidth = 30; // 外側円の厚さ（拡大）
-  const double progressStrokeWidth = 30; // プログレスバーの太さ（拡大）
-  const double innerRadius = 210; // 内側円の直径（拡大）
-
-  return Container(
-    width: outerRadius,
-    height: outerRadius,
-    child: Stack(
-      alignment: Alignment.center,
-      children: [
-        // 外側のドーナツ（インセット・ニューモーフィズム）
-        SizedBox(
-          width: outerRadius,
-          height: outerRadius,
-          child: CustomPaint(
-            painter: NeumorphicInsetDonutPainter(
-              thickness: outerStrokeWidth,
-              baseColor: Color(0xFFE0E5EC),
-              shadowColor: Colors.black,
-              highlightColor: Colors.white,
-            ),
-          ),
-        ),
-        // プログレスバー
-        SizedBox(
-          width: outerRadius - outerStrokeWidth,
-          height: outerRadius - outerStrokeWidth,
-          child: CustomPaint(
-            painter: GradientProgressPainter(
-              progress: progress.isFinite ? progress : 0.0,
-              backgroundColor: Color(0xFFD1D9E6), // トラックの背景色（元に戻す）
-              gradient: LinearGradient(
-                colors: [Color.fromARGB(255, 245, 233, 224), Color.fromARGB(255, 241, 168, 165)], // 根本と先端の色
-                begin: Alignment.centerLeft,
-                end: Alignment.centerRight,
-              ),
-              strokeWidth: progressStrokeWidth,
-            ),
-          ),
-        ),
-        // 内側の円
-        Container(
-          width: innerRadius,
-          height: innerRadius,
-          decoration: BoxDecoration(
-            color: Color(0xFFE0E5EC),
-            shape: BoxShape.circle,
-            boxShadow: [
-              BoxShadow(
-                color: Colors.white.withOpacity(0.8),
-                offset: Offset(-5, -5),
-                blurRadius: 8,
-              ),
-              BoxShadow(
-                color: Colors.black.withOpacity(0.2),
-                offset: Offset(5, 5),
-                blurRadius: 8,
-              ),
-            ],
-          ),
-        ),
-        // テキスト
-        Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                'DAY',
-                style: TextStyle(
-                  fontSize: 28,
-                  fontWeight: FontWeight.normal,
-                  color: Color.fromRGBO(120, 124, 130, 1),
+  // AppBarのビルド
+  PreferredSizeWidget _buildAppBar(BuildContext context) {
+    return AppBar(
+      backgroundColor: Color(0xFFE0E5EC),
+      elevation: 0,
+      automaticallyImplyLeading: false,
+      actions: [
+        Padding(
+          padding: const EdgeInsets.only(right: 16.0),
+          child: _buildNeumorphicIconButton(
+            icon: Icons.settings,
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => SetGoalScreen(isFirstTime: false),
                 ),
-              ),
-              Text(
-                '${progressProvider.progress.achievedDays}',
-                style: TextStyle(
-                  fontSize: 72,
-                  fontWeight: FontWeight.bold,
-                  color: Color.fromRGBO(120, 124, 130, 1),
-                ),
-              ),
-            ],
+              );
+            },
           ),
         ),
       ],
-    ),
-  );
-}
+    );
+  }
 
+  // メインボディのビルド
+  Widget _buildBody(BuildContext context, ProgressProvider progressProvider, double progress, int remainingDays) {
+    return Center(
+      child: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            _buildProgressIndicator(progressProvider, progress),
+            SizedBox(height: 20),
+            _buildActionButtons(context, progressProvider),
+            SizedBox(height: 20),
+            Text(
+              '目標達成に向けて、残り$remainingDays 日間頑張りましょう！',
+              style: TextStyle(
+                fontSize: 14,
+                fontWeight: FontWeight.bold,
+                color: Colors.grey[700],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
 
+  // ニューモーフィズム風ドーナツ型プログレスインジケータ
+  Widget _buildProgressIndicator(ProgressProvider progressProvider, double progress) {
+    const double outerRadius = 300;
+    const double outerStrokeWidth = 30;
+    const double progressStrokeWidth = 30;
+    const double innerRadius = 210;
 
+    return Container(
+      width: outerRadius,
+      height: outerRadius,
+      child: Stack(
+        alignment: Alignment.center,
+        children: [
+          // 外側のドーナツ
+          SizedBox(
+            width: outerRadius,
+            height: outerRadius,
+            child: CustomPaint(
+              painter: NeumorphicInsetDonutPainter(
+                thickness: outerStrokeWidth,
+                baseColor: Color(0xFFE0E5EC),
+                shadowColor: Colors.black,
+                highlightColor: Colors.white,
+              ),
+            ),
+          ),
+          // プログレスバー
+          SizedBox(
+            width: outerRadius - outerStrokeWidth,
+            height: outerRadius - outerStrokeWidth,
+            child: CustomPaint(
+              painter: GradientProgressPainter(
+                progress: progress.isFinite ? progress : 0.0,
+                backgroundColor: Color(0xFFD1D9E6),
+                gradient: LinearGradient(
+                  colors: [Color.fromARGB(255, 245, 233, 224), Color.fromARGB(255, 241, 168, 165)],
+                  begin: Alignment.centerLeft,
+                  end: Alignment.centerRight,
+                ),
+                strokeWidth: progressStrokeWidth,
+              ),
+            ),
+          ),
+          // 内側の円
+          Container(
+            width: innerRadius,
+            height: innerRadius,
+            decoration: BoxDecoration(
+              color: Color(0xFFE0E5EC),
+              shape: BoxShape.circle,
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.white.withOpacity(0.8),
+                  offset: Offset(-5, -5),
+                  blurRadius: 8,
+                ),
+                BoxShadow(
+                  color: Colors.black.withOpacity(0.2),
+                  offset: Offset(5, 5),
+                  blurRadius: 8,
+                ),
+              ],
+            ),
+          ),
+          // 中央のテキスト
+          Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  'DAY',
+                  style: TextStyle(
+                    fontSize: 28,
+                    fontWeight: FontWeight.normal,
+                    color: Color.fromRGBO(120, 124, 130, 1),
+                  ),
+                ),
+                Text(
+                  '${progressProvider.progress.achievedDays}',
+                  style: TextStyle(
+                    fontSize: 72,
+                    fontWeight: FontWeight.bold,
+                    color: Color.fromRGBO(120, 124, 130, 1),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
 
+  // WIN/LOSEボタンの行
   Widget _buildActionButtons(BuildContext context, ProgressProvider progressProvider) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -204,6 +211,7 @@ Widget _buildProgressIndicator(ProgressProvider progressProvider, double progres
     );
   }
 
+  // ニューモーフィックなアイコンボタン
   Widget _buildNeumorphicIconButton({
     required IconData icon,
     required VoidCallback onPressed,
@@ -241,6 +249,7 @@ Widget _buildProgressIndicator(ProgressProvider progressProvider, double progres
     );
   }
 
+  // ニューモーフィックな丸ボタン
   Widget _buildNeumorphicButton({
     required String label,
     required VoidCallback onPressed,

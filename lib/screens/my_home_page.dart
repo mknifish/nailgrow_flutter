@@ -49,7 +49,7 @@ class _MyHomePageState extends State<MyHomePage> {
         onTap: _onTabTapped,
         backgroundColor: _currentIndex == 1 ? Color(0xFFFFCDC5) : AppTheme.primaryColor,
         selectedItemColor: _currentIndex == 1 ? Color(0xFFE0E5EC) : AppTheme.accentColor,
-        unselectedItemColor: AppTheme.shadowDarkColor,
+        unselectedItemColor: const Color(0xFFB0BEC5),
         items: [
           BottomNavigationBarItem(
             icon: Icon(
@@ -62,11 +62,11 @@ class _MyHomePageState extends State<MyHomePage> {
           BottomNavigationBarItem(
             icon: Image.asset(
               'assets/img/icon_gray.png',
-              width: 36,
-              height: 36,
+              width: 40,
+              height: 40,
             ),
             activeIcon: Image.asset(
-              'assets/img/icon_white.png',
+              'assets/img/icon_pink.png',
               width: 36,
               height: 36,
             ),

@@ -50,10 +50,10 @@ class _HomeScreenState extends State<HomeScreen> {
       backgroundColor: Color(0xFFE0E5EC),
       elevation: 0,
       automaticallyImplyLeading: false,
-      toolbarHeight: 80,
+      toolbarHeight: 72,
       actions: [
         Padding(
-          padding: const EdgeInsets.only(right: 16.0),
+          padding: const EdgeInsets.only(right: 20.0),
           child: _buildNeumorphicIconButton(
             icon: Icons.settings,
             onPressed: () {
@@ -74,19 +74,19 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget _buildBody(BuildContext context, ProgressProvider progressProvider, double progress, int remainingDays) {
     return Center(
       child: Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(0),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             _buildProgressIndicator(progressProvider, progress),
-            SizedBox(height: 20),
+            SizedBox(height: 16),
             _buildActionButtons(context, progressProvider),
-            SizedBox(height: 20),
+            SizedBox(height: 60),
             Text(
               '目標達成に向けて、残り$remainingDays 日間頑張りましょう！',
               style: TextStyle(
-                fontSize: 14,
+                fontSize: 13,
                 fontWeight: FontWeight.bold,
                 color: Colors.grey[700],
               ),
@@ -193,7 +193,7 @@ class _HomeScreenState extends State<HomeScreen> {
   // WIN/LOSEボタンの行
   Widget _buildActionButtons(BuildContext context, ProgressProvider progressProvider) {
     return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      mainAxisAlignment: MainAxisAlignment.center,
       children: [
         _buildNeumorphicButton(
           label: 'WIN',
@@ -202,6 +202,7 @@ class _HomeScreenState extends State<HomeScreen> {
           },
           color: Color(0xFFF09182),
         ),
+        SizedBox(width: 101),
         _buildNeumorphicButton(
           label: 'LOSE',
           onPressed: () async {
@@ -242,7 +243,7 @@ class _HomeScreenState extends State<HomeScreen> {
         child: Center(
           child: Icon(
             icon,
-            size: 40,
+            size: 46,
             color: color ?? Colors.grey[700],
           ),
         ),

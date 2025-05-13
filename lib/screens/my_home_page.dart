@@ -54,6 +54,7 @@ class _MyHomePageState extends State<MyHomePage> {
           BottomNavigationBarItem(
             icon: Icon(
               Icons.data_usage,
+              size: 48,
               color: _currentIndex == 0 ? Color(0xFFF09182) : AppTheme.shadowDarkColor,
             ),
             label: '',
@@ -61,13 +62,13 @@ class _MyHomePageState extends State<MyHomePage> {
           BottomNavigationBarItem(
             icon: Image.asset(
               'assets/img/icon_gray.png',
-              width: 24,
-              height: 24,
+              width: 36,
+              height: 36,
             ),
             activeIcon: Image.asset(
               'assets/img/icon_white.png',
-              width: 24,
-              height: 24,
+              width: 36,
+              height: 36,
             ),
             label: '',
           ),

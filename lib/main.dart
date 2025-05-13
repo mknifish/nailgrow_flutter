@@ -30,7 +30,7 @@ class _AppWrapperState extends State<AppWrapper> {
     _printSharedPreferences();
 
     // 表示時間を1秒に短縮
-    Future.delayed(Duration(seconds: 30), () {
+    Future.delayed(Duration(seconds: 5), () {
       setState(() {
         _showSplashScreen = false;
       });

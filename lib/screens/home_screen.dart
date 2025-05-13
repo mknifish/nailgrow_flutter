@@ -50,6 +50,7 @@ class _HomeScreenState extends State<HomeScreen> {
       backgroundColor: Color(0xFFE0E5EC),
       elevation: 0,
       automaticallyImplyLeading: false,
+      toolbarHeight: 80,
       actions: [
         Padding(
           padding: const EdgeInsets.only(right: 16.0),
@@ -98,10 +99,10 @@ class _HomeScreenState extends State<HomeScreen> {
 
   // ニューモーフィズム風ドーナツ型プログレスインジケータ
   Widget _buildProgressIndicator(ProgressProvider progressProvider, double progress) {
-    const double outerRadius = 300;
-    const double outerStrokeWidth = 30;
-    const double progressStrokeWidth = 30;
-    const double innerRadius = 210;
+    const double outerRadius = 330;
+    const double outerStrokeWidth = 33;
+    const double progressStrokeWidth = 33;
+    const double innerRadius = 230;
 
     return Container(
       width: outerRadius,
@@ -176,7 +177,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 Text(
                   '${progressProvider.progress.achievedDays}',
                   style: TextStyle(
-                    fontSize: 72,
+                    fontSize: 115,
                     fontWeight: FontWeight.bold,
                     color: Color.fromRGBO(120, 124, 130, 1),
                   ),
@@ -220,8 +221,8 @@ class _HomeScreenState extends State<HomeScreen> {
     return GestureDetector(
       onTap: onPressed,
       child: Container(
-        width: 40,
-        height: 40,
+        width: 60,
+        height: 60,
         decoration: BoxDecoration(
           color: Color(0xFFE0E5EC),
           shape: BoxShape.circle,
@@ -241,7 +242,7 @@ class _HomeScreenState extends State<HomeScreen> {
         child: Center(
           child: Icon(
             icon,
-            size: 20,
+            size: 40,
             color: color ?? Colors.grey[700],
           ),
         ),
@@ -258,8 +259,8 @@ class _HomeScreenState extends State<HomeScreen> {
     return GestureDetector(
       onTap: onPressed,
       child: Container(
-        width: 60,
-        height: 60,
+        width: 90,
+        height: 90,
         decoration: BoxDecoration(
           color: Color(0xFFE0E5EC),
           shape: BoxShape.circle,
@@ -280,7 +281,7 @@ class _HomeScreenState extends State<HomeScreen> {
           child: Text(
             label,
             style: TextStyle(
-              fontSize: 16,
+              fontSize: 20,
               fontWeight: FontWeight.bold,
               color: color ?? Colors.grey[700],
             ),

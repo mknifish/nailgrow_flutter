@@ -66,7 +66,7 @@ class _MyHomePageState extends State<MyHomePage> {
               height: 40,
             ),
             activeIcon: Image.asset(
-              'assets/img/icon_pink.png',
+              'assets/img/icon_white.png',
               width: 36,
               height: 36,
             ),

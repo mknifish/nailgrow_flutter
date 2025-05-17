@@ -10,19 +10,10 @@ class SplashScreen extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text(
-                'nailgrow', // ロゴのテキスト
-                style: TextStyle(
-                  fontSize: 24,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.black,
-                ),
-              ),
-              SizedBox(height: 20), // テキストとアイコンの間にスペースを追加
               Image.asset(
                 'assets/img/icon_white.png',
-                width: 50,
-                height: 50,
+                width: 100,
+                height: 100,
               ),
             ],
           ),

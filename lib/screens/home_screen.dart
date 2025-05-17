@@ -170,7 +170,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   'DAY',
                   style: TextStyle(
                     fontSize: 28,
-                    fontWeight: FontWeight.normal,
+                    fontWeight: FontWeight.bold,
                     color: Color.fromRGBO(120, 124, 130, 1),
                   ),
                 ),

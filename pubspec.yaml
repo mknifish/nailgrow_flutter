@@ -84,6 +84,7 @@ flutter:
   assets:
     - assets/img/icon_gray.png
     - assets/img/icon_white.png
+    - assets/img/icon_pink.png
     - assets/img/nag_tassei.png
     - assets/img/nag_futassei.png
   #   - images/a_dot_burr.jpeg

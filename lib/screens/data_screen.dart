@@ -19,35 +19,44 @@ class DataScreen extends StatelessWidget {
       child: Consumer<DataProvider>(
         builder: (context, dataProvider, child) {
           return Scaffold(
-            appBar: AppBar(
-              title: Text(''), // AppBarのタイトルを削除
-              backgroundColor: Color(0xFFFFCDC5), // 直接色を指定
-            ),
-            body: Center(
+            backgroundColor: Color(0xFFFFCDC5),
+            body: SafeArea(
               child: Container(
-                color: Color(0xFFFFCDC5), // 背景色を指定
-                child: Padding(
-                  padding: const EdgeInsets.all(16.0),
+                width: MediaQuery.of(context).size.width,
+                color: Color(0xFFFFCDC5),
+                padding: EdgeInsets.symmetric(
+                  horizontal: MediaQuery.of(context).size.width * 0.05,
+                ),
+                child: SingleChildScrollView(
                   child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Wrap(
-                        spacing: 10.0,
-                        runSpacing: 10.0,
-                        children: List.generate(dataProvider.achievedGoals, (index) {
-                          return Image.asset(
-                            'assets/img/icon_white.png',
-                            width: 30,
-                            height: 30,
-                          );
-                        }),
+                      Container(
+                        width: MediaQuery.of(context).size.width * 0.9,
+                        child: Wrap(
+                          alignment: WrapAlignment.start,
+                          spacing: 0.0,
+                          runSpacing: MediaQuery.of(context).size.height * 0.025,
+                          children: List.generate(dataProvider.achievedGoals, (index) {
+                            return Container(
+                              width: (MediaQuery.of(context).size.width * 0.9) / 5,
+                              child: Image.asset(
+                                'assets/img/icon_white.png',
+                                width: 45,
+                                height: 45,
+                              ),
+                            );
+                          }),
+                        ),
                       ),
-                      SizedBox(height: 20), // スペース
-                      Text(
-                        'これまで${dataProvider.achievedGoals} 回達成！', // テキストを修正
-                        style: TextStyle(fontSize: 20),
+                      SizedBox(height: MediaQuery.of(context).size.height * 0.05),
+                      Center(
+                        child: Text(
+                          'これまで${dataProvider.achievedGoals} 回達成！',
+                          style: TextStyle(fontSize: 20),
+                        ),
                       ),
+                      SizedBox(height: MediaQuery.of(context).size.height * 0.1),
                     ],
                   ),
                 ),

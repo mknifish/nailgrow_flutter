@@ -17,54 +17,46 @@ class _SetGoalScreenState extends State<SetGoalScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFFE0E5EC), // ニューモーフィズムの背景色
-      appBar: AppBar(
-        backgroundColor: Color(0xFFE0E5EC),
-        elevation: 0,
-        automaticallyImplyLeading: !widget.isFirstTime,
-        iconTheme: IconThemeData(
-          color: Color.fromRGBO(120, 124, 130, 1),
-        ),
-      ),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 40.0, vertical: 24.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            Text(
-              '今日はどのくらい爪を伸ばしますか？',
-              style: TextStyle(
-                fontSize: 18, 
-                fontWeight: FontWeight.w500,
-                color: Color.fromRGBO(120, 124, 130, 0.8),
+      backgroundColor: Color(0xFFE0E5EC),
+      body: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 40.0),
+          child: Column(
+            children: [
+              SizedBox(height: MediaQuery.of(context).size.height * 0.15),
+              Text(
+                '今回はどのくらい爪を伸ばしますか？',
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                  color: Color.fromRGBO(120, 124, 130, 0.8),
+                ),
+                textAlign: TextAlign.center,
               ),
-              textAlign: TextAlign.center,
-            ),
-            SizedBox(height: 60),
-            _buildNeumorphicDropdown(),
-            SizedBox(height: 100),
-            _buildNeumorphicButton(
-              label: 'START',
-              onPressed: () async {
-                // 目標日数をShared Preferencesに保存するロジック
-                final prefs = await SharedPreferences.getInstance();
-                await prefs.setInt('targetLength', targetLength);
-                await prefs.setString('goalSetDate', DateTime.now().toIso8601String());
-                // 目標日数を設定した後、HomeScreenの再描画を促す
-                Navigator.pushAndRemoveUntil(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => MyHomePage(
-                      initialIndex: 0,
-                      key: UniqueKey(), // 再読み込みを確実にするためのUniqueKey
+              SizedBox(height: MediaQuery.of(context).size.height * 0.1),
+              _buildNeumorphicDropdown(),
+              Expanded(child: Container()),
+              _buildNeumorphicButton(
+                label: 'START',
+                onPressed: () async {
+                  final prefs = await SharedPreferences.getInstance();
+                  await prefs.setInt('targetLength', targetLength);
+                  await prefs.setString('goalSetDate', DateTime.now().toIso8601String());
+                  Navigator.pushAndRemoveUntil(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => MyHomePage(
+                        initialIndex: 0,
+                        key: UniqueKey(),
+                      ),
                     ),
-                  ),
-                  (Route<dynamic> route) => false,
-                );
-              },
-            )
-          ],
+                    (Route<dynamic> route) => false,
+                  );
+                },
+              ),
+              SizedBox(height: MediaQuery.of(context).size.height * 0.15),
+            ],
+          ),
         ),
       ),
     );
@@ -73,7 +65,7 @@ class _SetGoalScreenState extends State<SetGoalScreen> {
   Widget _buildNeumorphicDropdown() {
     return Center(
       child: Container(
-        width: 200,
+        width: 300,
         padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
         decoration: BoxDecoration(
           color: Color(0xFFE0E5EC),
@@ -91,51 +83,73 @@ class _SetGoalScreenState extends State<SetGoalScreen> {
             ),
           ],
         ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        child: Stack(
           children: [
-            Row(
-              children: [
-                Text(
-                  '$targetLength',
-                  style: TextStyle(
-                    color: Color.fromRGBO(120, 124, 130, 1),
-                    fontSize: 36,
-                    fontWeight: FontWeight.w500,
+            Center(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    '$targetLength',
+                    style: TextStyle(
+                      color: Color.fromRGBO(120, 124, 130, 1),
+                      fontSize: 72,
+                      fontWeight: FontWeight.w500,
+                    ),
                   ),
-                ),
-                SizedBox(width: 8),
-                Text(
-                  'mm',
-                  style: TextStyle(
-                    color: Color.fromRGBO(120, 124, 130, 0.7),
-                    fontSize: 20,
-                    fontWeight: FontWeight.w400,
+                  SizedBox(width: 8),
+                  Text(
+                    'mm',
+                    style: TextStyle(
+                      color: Color.fromRGBO(120, 124, 130, 0.7),
+                      fontSize: 20,
+                      fontWeight: FontWeight.w400,
+                    ),
                   ),
-                ),
-              ],
-            ),
-            DropdownButton<int>(
-              value: targetLength,
-              icon: Icon(
-                Icons.arrow_drop_down,
-                color: Color.fromRGBO(120, 124, 130, 0.7),
+                ],
               ),
-              iconSize: 24,
-              elevation: 16,
-              underline: Container(height: 0),
-              style: TextStyle(fontSize: 0), // Hide the text as we're using custom text
-              items: [1, 2, 3, 4, 5].map((int value) {
-                return DropdownMenuItem<int>(
-                  value: value,
-                  child: Text('$value'),
-                );
-              }).toList(),
-              onChanged: (int? newValue) {
-                setState(() {
-                  targetLength = newValue!;
-                });
-              },
+            ),
+            Positioned.fill(
+              child: DropdownButton<int>(
+                value: targetLength,
+                icon: Align(
+                  alignment: Alignment.centerRight,
+                  child: Icon(
+                    Icons.arrow_drop_down,
+                    color: Color.fromRGBO(120, 124, 130, 0.7),
+                  ),
+                ),
+                iconSize: 24,
+                elevation: 16,
+                underline: Container(height: 0),
+                isExpanded: true,
+                itemHeight: 60,
+                dropdownColor: Colors.white,
+                style: TextStyle(
+                  color: Color.fromRGBO(120, 124, 130, 1),
+                  fontSize: 36,
+                  fontWeight: FontWeight.w500,
+                ),
+                items: [1, 2, 3, 4, 5].map((int value) {
+                  return DropdownMenuItem<int>(
+                    value: value,
+                    child: Text(
+                      '$value',
+                      textAlign: TextAlign.center,
+                    ),
+                  );
+                }).toList(),
+                selectedItemBuilder: (BuildContext context) {
+                  return [1, 2, 3, 4, 5].map<Widget>((int value) {
+                    return Container();
+                  }).toList();
+                },
+                onChanged: (int? newValue) {
+                  setState(() {
+                    targetLength = newValue!;
+                  });
+                },
+              ),
             ),
           ],
         ),
@@ -151,8 +165,8 @@ class _SetGoalScreenState extends State<SetGoalScreen> {
       child: GestureDetector(
         onTap: onPressed,
         child: Container(
-          width: 120,
-          height: 120,
+          width: 150,
+          height: 150,
           decoration: BoxDecoration(
             color: Color(0xFFE0E5EC),
             shape: BoxShape.circle,
@@ -173,9 +187,9 @@ class _SetGoalScreenState extends State<SetGoalScreen> {
             child: Text(
               label,
               style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.w500,
-                color: Color(0xFFF09182),
+                fontSize: 28,
+                fontWeight: FontWeight.bold,
+                color: Color.fromRGBO(120, 124, 130, 1),
               ),
             ),
           ),

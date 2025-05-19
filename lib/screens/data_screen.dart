@@ -51,9 +51,23 @@ class DataScreen extends StatelessWidget {
                       ),
                       SizedBox(height: MediaQuery.of(context).size.height * 0.05),
                       Center(
-                        child: Text(
-                          'これまで${dataProvider.achievedGoals} 回達成！',
-                          style: TextStyle(fontSize: 20),
+                        child: RichText(
+                          textAlign: TextAlign.center,
+                          text: TextSpan(
+                            style: TextStyle(fontSize: 20, color: Colors.grey[700],),
+                            children: <TextSpan>[
+                              TextSpan(text: 'これまで'),
+                              TextSpan(
+                                text: '${dataProvider.achievedGoals}',
+                                style: TextStyle(
+                                  fontSize: 84,
+                                  fontWeight: FontWeight.bold,
+                                  color:Colors.grey[700],
+                                ),
+                              ),
+                              TextSpan(text: ' 回達成！'),
+                            ],
+                          ),
                         ),
                       ),
                       SizedBox(height: MediaQuery.of(context).size.height * 0.1),

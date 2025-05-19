@@ -84,9 +84,9 @@ class _HomeScreenState extends State<HomeScreen> {
             _buildActionButtons(context, progressProvider),
             SizedBox(height: 60),
             Text(
-              '目標達成に向けて、残り$remainingDays 日間頑張りましょう！',
+              '目標まで${(remainingDays / 10).toStringAsFixed(1)}mm、残り$remainingDays 日です！',
               style: TextStyle(
-                fontSize: 13,
+                fontSize: 15,
                 fontWeight: FontWeight.bold,
                 color: Colors.grey[700],
               ),

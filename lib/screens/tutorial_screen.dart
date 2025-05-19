@@ -16,20 +16,19 @@ class TutorialScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('チュートリアル'),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text('これはチュートリアル画面です。'),
-            SizedBox(height: 20),
-            ElevatedButton(
-              onPressed: () => _completeTutorial(context),
-              child: Text('チュートリアルを完了'),
+      backgroundColor: Color(0xFFFFCDC5),
+      body: GestureDetector(
+        behavior: HitTestBehavior.opaque,
+        onTap: () => _completeTutorial(context),
+        child: Center(
+          child: Text(
+            'それでは、はじめましょう！',
+            style: TextStyle(
+              fontSize: 18,
+              color: Colors.grey[700],
             ),
-          ],
+            textAlign: TextAlign.center,
+          ),
         ),
       ),
     );

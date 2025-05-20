@@ -200,7 +200,7 @@ class _TutorialHomeScreenState extends State<TutorialHomeScreen> {
       case 0:
         return Positioned(
           top: 180,
-          right: 40,
+          right: 20,
           child: _buildTooltip(
             '最初に目標値を設定します。\n目標値を変更したいときは、\nこのボタンを押します。',
             TriangleDirection.topRight,
@@ -208,7 +208,7 @@ class _TutorialHomeScreenState extends State<TutorialHomeScreen> {
         );
       case 1:
         return Positioned(
-          bottom: 300,
+          bottom: 210,
           left: 50,
           right: 50,
           child: _buildTooltip(
@@ -218,8 +218,8 @@ class _TutorialHomeScreenState extends State<TutorialHomeScreen> {
         );
       case 2:
         return Positioned(
-          bottom: 350,
-          left: 80,
+          bottom: 340,
+          left: 70,
           child: _buildTooltip(
             '爪を噛まなかったら、\nこちらのWINボタンを。',
             TriangleDirection.bottomLeft,
@@ -227,8 +227,8 @@ class _TutorialHomeScreenState extends State<TutorialHomeScreen> {
         );
       case 3:
         return Positioned(
-          bottom: 350,
-          right: 80,
+          bottom: 340,
+          right: 40,
           child: _buildTooltip(
             '噛んでしまったら、\nLOSEボタンを押します。',
             TriangleDirection.bottomRight,
@@ -236,12 +236,12 @@ class _TutorialHomeScreenState extends State<TutorialHomeScreen> {
         );
       case 4:
         return Positioned(
-          top: 400,
-          left: 50,
-          right: 50,
+          top: 110,
+          left: 80,
+          right: 60,
           child: _buildTooltip(
             '連続で爪を噛まなかった日数\nがカウントされます。',
-            TriangleDirection.topLeft,
+            TriangleDirection.bottomLeft,
           ),
         );
       default: // case 5
@@ -262,7 +262,7 @@ class _TutorialHomeScreenState extends State<TutorialHomeScreen> {
       case 0:
         // 設定ボタンを強調表示
         return Positioned(
-          top: 120,
+          top: 110,
           right: 20,
           child: Container(
             width: 60,
@@ -362,8 +362,8 @@ class _TutorialHomeScreenState extends State<TutorialHomeScreen> {
       case TriangleDirection.topRight:
         triangle = Container(
           margin: EdgeInsets.only(right: 20),
-          width: 20,
-          height: 15,
+          width: 10,
+          height: 10,
           child: CustomPaint(
             painter: TrianglePainter(Colors.white, TriangleDirection.topRight),
           ),
@@ -384,8 +384,8 @@ class _TutorialHomeScreenState extends State<TutorialHomeScreen> {
       case TriangleDirection.bottomLeft:
         triangle = Container(
           margin: EdgeInsets.only(left: 20),
-          width: 20,
-          height: 15,
+          width: 15,
+          height: 10,
           child: CustomPaint(
             painter: TrianglePainter(Colors.white, TriangleDirection.bottomLeft),
           ),
@@ -394,9 +394,9 @@ class _TutorialHomeScreenState extends State<TutorialHomeScreen> {
         break;
       case TriangleDirection.bottomRight:
         triangle = Container(
-          margin: EdgeInsets.only(right: 20),
-          width: 20,
-          height: 15,
+          margin: EdgeInsets.only(right: 50),
+          width: 15,
+          height: 10,
           child: CustomPaint(
             painter: TrianglePainter(Colors.white, TriangleDirection.bottomRight),
           ),

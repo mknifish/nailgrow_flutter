@@ -17,6 +17,12 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     super.initState();
+    
+    // 現在のSharedPreferencesの値を表示（デバッグ用）
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _homeService.printDebugInfo();
+    });
+    
     _homeService.loadPreferences(
       onLoaded: (loadedTargetDays, loadedAchievedGoals, loadedAchievedDays) {
         // ローカルの状態変数は不要になるため削除
@@ -27,6 +33,11 @@ class _HomeScreenState extends State<HomeScreen> {
         // });
       },
     );
+    
+    // 経過日数を更新
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _homeService.updateAchievedDays(context);
+    });
   }
 
   @override

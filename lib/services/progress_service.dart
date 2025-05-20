@@ -10,11 +10,20 @@ class ProgressService {
   PreferencesService get preferencesService => _preferencesService; // _preferencesServiceゲッターを追加
 
   Future<void> updateAchievedDays(BuildContext context) async {
+    print('===== updateAchievedDays 開始 =====');
     DateTime? goalSetDate = await _preferencesService.getGoalSetDate();
+    print('goalSetDate: $goalSetDate');
+    
     if (goalSetDate != null) {
       int achievedDays = DateTime.now().difference(goalSetDate).inDays;
+      achievedDays = achievedDays < 0 ? 0 : achievedDays;
+      print('計算したachievedDays: $achievedDays');
+      
       await _preferencesService.setAchievedDays(achievedDays);
       Provider.of<ProgressProvider>(context, listen: false).loadProgress();
+      print('達成日数を更新しました');
+    } else {
+      print('goalSetDateがnullのため更新できません');
     }
   }
 

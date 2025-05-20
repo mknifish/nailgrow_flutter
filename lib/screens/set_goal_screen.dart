@@ -12,7 +12,7 @@ class SetGoalScreen extends StatefulWidget {
 }
 
 class _SetGoalScreenState extends State<SetGoalScreen> {
-  int targetLength = 1; // 初期目標長さ (mm)
+  int targetDays = 1; // 初期目標日数
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +40,7 @@ class _SetGoalScreenState extends State<SetGoalScreen> {
                 label: 'START',
                 onPressed: () async {
                   final prefs = await SharedPreferences.getInstance();
-                  await prefs.setInt('targetLength', targetLength);
+                  await prefs.setInt('targetDays', targetDays * 10);
                   await prefs.setString('goalSetDate', DateTime.now().toIso8601String());
                   Navigator.pushAndRemoveUntil(
                     context,
@@ -92,7 +92,7 @@ class _SetGoalScreenState extends State<SetGoalScreen> {
               textBaseline: TextBaseline.alphabetic,
               children: [
                 Text(
-                  '$targetLength',
+                  '$targetDays',
                   style: const TextStyle(
                     color: Color.fromRGBO(120, 124, 130, 1),
                     fontSize: 72,
@@ -133,7 +133,7 @@ class _SetGoalScreenState extends State<SetGoalScreen> {
                   ),
                 ),
                 child: DropdownButton<int>(
-                  value: targetLength,
+                  value: targetDays,
                   icon: const SizedBox.shrink(), // アイコンを非表示にする
                   elevation: 8,
                   underline: Container(height: 0),
@@ -170,7 +170,7 @@ class _SetGoalScreenState extends State<SetGoalScreen> {
                               textAlign: TextAlign.center,
                               style: TextStyle(
                                 fontSize: 40,
-                                fontWeight: value == targetLength ? FontWeight.bold : FontWeight.w400,
+                                fontWeight: value == targetDays ? FontWeight.bold : FontWeight.w400,
                                 color: const Color.fromRGBO(120, 124, 130, 1),
                               ),
                             ),
@@ -179,7 +179,7 @@ class _SetGoalScreenState extends State<SetGoalScreen> {
                               'mm',
                               style: TextStyle(
                                 fontSize: 20,
-                                fontWeight: value == targetLength ? FontWeight.bold : FontWeight.w400,
+                                fontWeight: value == targetDays ? FontWeight.bold : FontWeight.w400,
                                 color: const Color.fromRGBO(120, 124, 130, 0.7),
                               ),
                             ),
@@ -195,7 +195,7 @@ class _SetGoalScreenState extends State<SetGoalScreen> {
                   },
                   onChanged: (int? newValue) {
                     setState(() {
-                      targetLength = newValue!;
+                      targetDays = newValue!;
                     });
                   },
                 ),

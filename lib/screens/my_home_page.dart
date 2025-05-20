@@ -27,8 +27,8 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   final List<Widget> _pages = [
-    HomeScreen(),
-    DataScreen(),
+    const HomeScreen(),
+    const DataScreen(),
   ];
 
   void _onTabTapped(int index) {
@@ -96,7 +96,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 Navigator.pop(context);
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => SetGoalScreen(isFirstTime: false)),
+                  MaterialPageRoute(builder: (context) => const SetGoalScreen(isFirstTime: false)),
                 );
               },
             ),
@@ -107,7 +107,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 Navigator.pop(context);
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => NotificationsScreen()),
+                  MaterialPageRoute(builder: (context) => const NotificationsScreen()),
                 );
               },
             ),
@@ -118,7 +118,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 Navigator.pop(context);
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => TestDataScreen()),
+                  MaterialPageRoute(builder: (context) => const TestDataScreen()),
                 );
               },
             ),

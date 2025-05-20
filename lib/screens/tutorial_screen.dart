@@ -18,7 +18,7 @@ class TutorialIntroScreen extends StatelessWidget {
           Navigator.pushReplacement(
             context,
             MaterialPageRoute(
-              builder: (context) => TutorialHomeScreen(), // 次の画面へ遷移
+              builder: (context) => const TutorialHomeScreen(), // 次の画面へ遷移
             ),
           );
         },
@@ -99,7 +99,7 @@ class _TutorialHomeScreenState extends State<TutorialHomeScreen> {
       body: Stack(
         children: [
           // ベースとなるMyHomePage
-          MyHomePage(initialIndex: 0),
+          const MyHomePage(initialIndex: 0),
           
           // 半透明のグレーオーバーレイ - ステップごとに調整
           Container(
@@ -512,7 +512,7 @@ class TutorialScreen extends StatelessWidget {
     await _preferencesService.setTutorialCompleted();
     Navigator.pushReplacement(
       context,
-      MaterialPageRoute(builder: (context) => SetGoalScreen(isFirstTime: true)),
+      MaterialPageRoute(builder: (context) => const SetGoalScreen(isFirstTime: true)),
     );
   }
 

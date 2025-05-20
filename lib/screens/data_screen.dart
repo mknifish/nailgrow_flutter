@@ -14,7 +14,7 @@ class DataScreen extends StatelessWidget {
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(
-            builder: (context) => SetGoalScreen(isFirstTime: false),
+            builder: (context) => const SetGoalScreen(isFirstTime: false),
           ),
         );
       },

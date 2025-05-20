@@ -35,7 +35,7 @@ class HomeService {
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(
-            builder: (context) => DataScreen(),
+            builder: (context) => const DataScreen(),
           ),
         );
       });
@@ -49,7 +49,7 @@ class HomeService {
     await _dialogService.showLoseDialog(context, () {
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => SetGoalScreen(isFirstTime: true)),
+        MaterialPageRoute(builder: (context) => const SetGoalScreen(isFirstTime: true)),
       );
     });
   }

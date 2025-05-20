@@ -35,7 +35,7 @@ class CustomDrawer extends StatelessWidget {
               Navigator.pop(context);
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => EditProfileScreen()),
+                MaterialPageRoute(builder: (context) => const EditProfileScreen()),
               );
             },
           ),
@@ -46,7 +46,7 @@ class CustomDrawer extends StatelessWidget {
               Navigator.pop(context);
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => SetGoalScreen(isFirstTime: false)),
+                MaterialPageRoute(builder: (context) => const SetGoalScreen(isFirstTime: false)),
               );
             },
           ),
@@ -57,7 +57,7 @@ class CustomDrawer extends StatelessWidget {
               Navigator.pop(context);
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => NotificationsScreen()),
+                MaterialPageRoute(builder: (context) => const NotificationsScreen()),
               );
             },
           ),
@@ -68,7 +68,7 @@ class CustomDrawer extends StatelessWidget {
               Navigator.pop(context);
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => TestDataScreen()),
+                MaterialPageRoute(builder: (context) => const TestDataScreen()),
               );
             },
           ),

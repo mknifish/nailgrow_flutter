@@ -62,7 +62,7 @@ class _HomeScreenState extends State<HomeScreen> {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => SetGoalScreen(isFirstTime: false),
+                  builder: (context) => const SetGoalScreen(isFirstTime: false),
                 ),
               );
             },

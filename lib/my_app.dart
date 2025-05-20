@@ -25,9 +25,9 @@ class MyApp extends StatelessWidget {
         } else {
           return MaterialApp(
             theme: AppTheme.theme, // テーマを適用
-            home: snapshot.data == true ? MyHomePage() : TutorialIntroScreen(), // TutorialIntroScreenからスタート
+            home: snapshot.data == true ? const MyHomePage() : const TutorialIntroScreen(), // TutorialIntroScreenからスタート
             routes: {
-              '/test': (context) => TestDataScreen(),
+              '/test': (context) => const TestDataScreen(),
             },
           );
         }

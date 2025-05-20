@@ -12,7 +12,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await FirebaseService.initializeFirebase();
 
-  runApp(AppWrapper());
+  runApp(const AppWrapper());
 }
 
 class AppWrapper extends StatefulWidget {
@@ -48,7 +48,7 @@ class _AppWrapperState extends State<AppWrapper> {
     if (_showSplashScreen) {
       return MaterialApp(
         theme: AppTheme.theme, // テーマを適用
-        home: SplashScreen(),
+        home: const SplashScreen(),
       );
     } else {
       return MultiProvider(

@@ -13,20 +13,18 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   final HomeService _homeService = HomeService();
-  int? targetDays;
-  int achievedDays = 0;
-  int achievedGoals = 0;
 
   @override
   void initState() {
     super.initState();
     _homeService.loadPreferences(
       onLoaded: (loadedTargetDays, loadedAchievedGoals, loadedAchievedDays) {
-        setState(() {
-          targetDays = loadedTargetDays;
-          achievedGoals = loadedAchievedGoals;
-          achievedDays = loadedAchievedDays;
-        });
+        // ローカルの状態変数は不要になるため削除
+        // setState(() {
+        //   targetDays = loadedTargetDays;
+        //   achievedGoals = loadedAchievedGoals;
+        //   achievedDays = loadedAchievedDays;
+        // });
       },
     );
   }
@@ -36,7 +34,12 @@ class _HomeScreenState extends State<HomeScreen> {
     return Consumer<ProgressProvider>(
       builder: (context, progressProvider, child) {
         double progress = progressProvider.progress.progress;
-        int remainingDays = (targetDays ?? 0) - achievedDays;
+        // remainingDaysをProviderの値に基づいて計算
+        int remainingDays = (progressProvider.progress.targetDays ?? 0) - progressProvider.progress.achievedDays;
+        
+        // ローカルの状態変数は不要になるため削除
+        // int remainingDays = (targetDays ?? 0) - achievedDays;
+
         return Scaffold(
           backgroundColor: const Color(0xFFE0E5EC),
           appBar: _buildAppBar(context),
@@ -200,7 +203,7 @@ class _HomeScreenState extends State<HomeScreen> {
         _buildNeumorphicButton(
           label: 'WIN',
           onPressed: () async {
-            await _homeService.handleWinButtonPressed(context, targetDays, achievedDays);
+            await _homeService.handleWinButtonPressed(context, progressProvider.progress.targetDays, progressProvider.progress.achievedDays);
           },
           color: const Color(0xFFF09182),
         ),

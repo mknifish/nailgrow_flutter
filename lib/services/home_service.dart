@@ -22,13 +22,29 @@ class HomeService {
   }
 
   Future<void> handleWinButtonPressed(BuildContext context, int? targetDays, int achievedDays) async {
-    await _progressService.updateAchievedDays(context);
-    achievedDays = DateTime.now().difference((await _progressService.preferencesService.getGoalSetDate())!).inDays; // 修正ポイント
-    achievedDays = achievedDays < 0 ? 0 : achievedDays;
-    if (achievedDays >= (targetDays ?? 0)) {
+    // 最初にGoalSetDateを取得
+    DateTime? goalSetDate = await _progressService.preferencesService.getGoalSetDate();
+    
+    // もし目標設定日がなければ早期リターン
+    if (goalSetDate == null) return;
+    
+    // 実際の経過日数を計算
+    int actualAchievedDays = DateTime.now().difference(goalSetDate).inDays;
+    actualAchievedDays = actualAchievedDays < 0 ? 0 : actualAchievedDays;
+    
+    // 達成日数をSharedPreferencesに保存して更新
+    await _progressService.preferencesService.setAchievedDays(actualAchievedDays);
+    
+    // ProviderのProgressを更新
+    Provider.of<ProgressProvider>(context, listen: false).loadProgress();
+    
+    // 達成した日数が目標日数以上なら成功処理
+    if (actualAchievedDays >= (targetDays ?? 0)) {
       await _progressService.incrementAchievedGoals();
       Provider.of<DataProvider>(context, listen: false).loadAchievedGoals();
       await _progressService.resetAchievedDays(context);
+      
+      // UI更新のためにProviderを再度更新
       Provider.of<ProgressProvider>(context, listen: false).loadProgress();
 
       await _dialogService.showWinDialog(context, () async {
@@ -39,8 +55,6 @@ class HomeService {
           ),
         );
       });
-    } else {
-      Provider.of<ProgressProvider>(context, listen: false).loadProgress(); // ProgressProviderのインポートに対応
     }
   }
 

@@ -34,23 +34,20 @@ class NailGrowMigrationExample {
       case AppStateType.updateFromAngularJS:
         // AngularJSバージョンからのアップデートの場合はデータ移行を実行
         if (context.mounted) {
-          final shouldMigrate = await _showMigrationConfirmDialog(context);
-          if (shouldMigrate && context.mounted) {
-            // データ移行を実行
-            await SpecificOriginMigration.migrateFromSpecificOrigin(
-              context,
-              url: oldAppUrl,
-              migrationCompletedKey: 'nailgrow_migration_completed',
-              onDataReceived: (data) async {
-                // 専用のデータ変換処理を実行
-                await NailGrowDataMigration.convertLocalStorageToSharedPreferences(data);
-              },
-            );
-            
-            // 移行完了後のコールバックを実行
-            if (onMigrationCompleted != null && context.mounted) {
-              onMigrationCompleted();
-            }
+          // データ移行を確認なしで実行
+          await SpecificOriginMigration.migrateFromSpecificOrigin(
+            context,
+            url: oldAppUrl,
+            migrationCompletedKey: 'nailgrow_migration_completed',
+            onDataReceived: (data) async {
+              // 専用のデータ変換処理を実行
+              await NailGrowDataMigration.convertLocalStorageToSharedPreferences(data);
+            },
+          );
+          
+          // 移行完了後のコールバックを実行
+          if (onMigrationCompleted != null && context.mounted) {
+            onMigrationCompleted();
           }
         }
         break;
@@ -63,34 +60,6 @@ class NailGrowMigrationExample {
         // 既存インストールの場合は特に何もしない
         break;
     }
-  }
-  
-  /// 移行確認ダイアログを表示
-  static Future<bool> _showMigrationConfirmDialog(BuildContext context) async {
-    final result = await showDialog<bool>(
-      context: context,
-      builder: (context) {
-        return AlertDialog(
-          title: const Text('前バージョンのデータ'),
-          content: const Text(
-            '以前のバージョンのアプリで保存したデータが見つかりました。\n'
-            'このデータを新しいバージョンに移行しますか？'
-          ),
-          actions: [
-            TextButton(
-              onPressed: () => Navigator.of(context).pop(false),
-              child: const Text('いいえ'),
-            ),
-            TextButton(
-              onPressed: () => Navigator.of(context).pop(true),
-              child: const Text('はい'),
-            ),
-          ],
-        );
-      },
-    );
-    
-    return result ?? false;
   }
   
   /// 移行したデータからProgressモデルを作成する例

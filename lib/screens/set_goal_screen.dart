@@ -3,7 +3,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:provider/provider.dart';
 import 'package:nailgrow_mobile_app_dev/state/progress_provider.dart';
 import 'package:nailgrow_mobile_app_dev/state/data_provider.dart';
-import 'package:nailgrow_mobile_app_dev/services/home_service.dart';
 import 'package:nailgrow_mobile_app_dev/services/dialog_service.dart';
 import 'package:nailgrow_mobile_app_dev/screens/data_screen.dart';
 import 'my_home_page.dart';
@@ -24,7 +23,6 @@ class SetGoalScreen extends StatefulWidget {
 
 class _SetGoalScreenState extends State<SetGoalScreen> {
   int targetDays = 1; // 初期目標日数
-  final HomeService _homeService = HomeService();
   final DialogService _dialogService = DialogService();
 
   @override
@@ -114,12 +112,10 @@ class _SetGoalScreenState extends State<SetGoalScreen> {
                       
                       // 経過日数を計算
                       int currentAchievedDays = 0;
-                      if (oldGoalSetDate != null) {
-                        final DateTime parsedDate = DateTime.parse(oldGoalSetDate);
-                        currentAchievedDays = DateTime.now().difference(parsedDate).inDays;
-                        currentAchievedDays = currentAchievedDays < 0 ? 0 : currentAchievedDays;
-                      }
-                      print('経過日数（計算）: $currentAchievedDays');
+                      final DateTime parsedDate = DateTime.parse(oldGoalSetDate);
+                      currentAchievedDays = DateTime.now().difference(parsedDate).inDays;
+                      currentAchievedDays = currentAchievedDays < 0 ? 0 : currentAchievedDays;
+                                          print('経過日数（計算）: $currentAchievedDays');
                       
                       // 目標日数を更新
                       await prefs.setInt('targetDays', newTargetDays);

@@ -35,7 +35,7 @@ class _HomeScreenState extends State<HomeScreen> {
       builder: (context, progressProvider, child) {
         double progress = progressProvider.progress.progress;
         // remainingDaysをProviderの値に基づいて計算
-        int remainingDays = (progressProvider.progress.targetDays ?? 0) - progressProvider.progress.achievedDays;
+        int remainingDays = (progressProvider.progress.targetDays) - progressProvider.progress.achievedDays;
         
         // ローカルの状態変数は不要になるため削除
         // int remainingDays = (targetDays ?? 0) - achievedDays;

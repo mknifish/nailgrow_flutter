@@ -66,7 +66,7 @@ class _SetGoalScreenState extends State<SetGoalScreen> {
     return Center(
       child: Container(
         width: 300,
-        padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+        padding: EdgeInsets.symmetric(horizontal: 20, vertical: 15),
         decoration: BoxDecoration(
           color: Color(0xFFE0E5EC),
           borderRadius: BorderRadius.circular(30),
@@ -84,71 +84,121 @@ class _SetGoalScreenState extends State<SetGoalScreen> {
           ],
         ),
         child: Stack(
+          alignment: Alignment.center,
           children: [
-            Center(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    '$targetLength',
-                    style: TextStyle(
-                      color: Color.fromRGBO(120, 124, 130, 1),
-                      fontSize: 72,
-                      fontWeight: FontWeight.w500,
-                    ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.baseline,
+              textBaseline: TextBaseline.alphabetic,
+              children: [
+                Text(
+                  '$targetLength',
+                  style: TextStyle(
+                    color: Color.fromRGBO(120, 124, 130, 1),
+                    fontSize: 72,
+                    fontWeight: FontWeight.w500,
                   ),
-                  SizedBox(width: 8),
-                  Text(
-                    'mm',
-                    style: TextStyle(
-                      color: Color.fromRGBO(120, 124, 130, 0.7),
-                      fontSize: 20,
-                      fontWeight: FontWeight.w400,
-                    ),
+                ),
+                SizedBox(width: 10),
+                Text(
+                  'mm',
+                  style: TextStyle(
+                    color: Color.fromRGBO(120, 124, 130, 0.7),
+                    fontSize: 24,
+                    fontWeight: FontWeight.w400,
                   ),
-                ],
+                ),
+              ],
+            ),
+            Positioned(
+              right: 0,
+              child: Icon(
+                Icons.arrow_drop_down,
+                color: Color.fromRGBO(120, 124, 130, 0.7),
+                size: 36,
               ),
             ),
             Positioned.fill(
-              child: DropdownButton<int>(
-                value: targetLength,
-                icon: Align(
-                  alignment: Alignment.centerRight,
-                  child: Icon(
-                    Icons.arrow_drop_down,
-                    color: Color.fromRGBO(120, 124, 130, 0.7),
+              child: Theme(
+                data: Theme.of(context).copyWith(
+                  canvasColor: Color(0xFFF5F9FC),
+                  shadowColor: Colors.transparent,
+                  highlightColor: Color(0xFFE0E5EC).withOpacity(0.3),
+                  dividerColor: Colors.transparent,
+                  popupMenuTheme: PopupMenuThemeData(
+                    elevation: 8,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20),
+                    ),
                   ),
                 ),
-                iconSize: 24,
-                elevation: 16,
-                underline: Container(height: 0),
-                isExpanded: true,
-                itemHeight: 60,
-                dropdownColor: Colors.white,
-                style: TextStyle(
-                  color: Color.fromRGBO(120, 124, 130, 1),
-                  fontSize: 36,
-                  fontWeight: FontWeight.w500,
+                child: DropdownButton<int>(
+                  value: targetLength,
+                  icon: SizedBox.shrink(), // アイコンを非表示にする
+                  elevation: 8,
+                  underline: Container(height: 0),
+                  isExpanded: true,
+                  itemHeight: 70,
+                  alignment: Alignment.center,
+                  dropdownColor: Color(0xFFF5F9FC),
+                  style: TextStyle(
+                    color: Color.fromRGBO(120, 124, 130, 1),
+                    fontSize: 36,
+                    fontWeight: FontWeight.w500,
+                  ),
+                  items: [1, 2, 3, 4, 5].map((int value) {
+                    return DropdownMenuItem<int>(
+                      value: value,
+                      alignment: Alignment.center,
+                      child: Container(
+                        padding: EdgeInsets.symmetric(vertical: 10),
+                        decoration: BoxDecoration(
+                          border: Border(
+                            bottom: BorderSide(
+                              color: Color(0xFFE0E5EC),
+                              width: 1,
+                            ),
+                          ),
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.baseline,
+                          textBaseline: TextBaseline.alphabetic,
+                          children: [
+                            Text(
+                              '$value',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                fontSize: 40,
+                                fontWeight: value == targetLength ? FontWeight.bold : FontWeight.w400,
+                                color: Color.fromRGBO(120, 124, 130, 1),
+                              ),
+                            ),
+                            SizedBox(width: 8),
+                            Text(
+                              'mm',
+                              style: TextStyle(
+                                fontSize: 20,
+                                fontWeight: value == targetLength ? FontWeight.bold : FontWeight.w400,
+                                color: Color.fromRGBO(120, 124, 130, 0.7),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    );
+                  }).toList(),
+                  selectedItemBuilder: (BuildContext context) {
+                    return [1, 2, 3, 4, 5].map<Widget>((int value) {
+                      return Container();
+                    }).toList();
+                  },
+                  onChanged: (int? newValue) {
+                    setState(() {
+                      targetLength = newValue!;
+                    });
+                  },
                 ),
-                items: [1, 2, 3, 4, 5].map((int value) {
-                  return DropdownMenuItem<int>(
-                    value: value,
-                    child: Text(
-                      '$value',
-                      textAlign: TextAlign.center,
-                    ),
-                  );
-                }).toList(),
-                selectedItemBuilder: (BuildContext context) {
-                  return [1, 2, 3, 4, 5].map<Widget>((int value) {
-                    return Container();
-                  }).toList();
-                },
-                onChanged: (int? newValue) {
-                  setState(() {
-                    targetLength = newValue!;
-                  });
-                },
               ),
             ),
           ],

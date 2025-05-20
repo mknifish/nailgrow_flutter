@@ -20,7 +20,7 @@ class PreferencesService {
 
   Future<int> getAchievedDays() async {
     final prefs = await SharedPreferences.getInstance();
-    return prefs.getInt('achievedDays') ?? 10;
+    return prefs.getInt('achievedDays') ?? 0;
   }
 
   Future<void> setGoalSetDate(DateTime date) async {
@@ -40,7 +40,7 @@ class PreferencesService {
   Future<Progress> getProgress() async {
     final prefs = await SharedPreferences.getInstance();
     int targetDays = prefs.getInt('targetDays') ?? 30;
-    int achievedDays = prefs.getInt('achievedDays') ?? 10;
+    int achievedDays = prefs.getInt('achievedDays') ?? 0;
     return Progress(targetDays: targetDays, achievedDays: achievedDays);
   }
 

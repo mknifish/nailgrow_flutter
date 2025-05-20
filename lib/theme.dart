@@ -13,18 +13,18 @@ class AppTheme {
         secondary: accentColor,
       ),
       scaffoldBackgroundColor: primaryColor,
-      appBarTheme: AppBarTheme(
+      appBarTheme: const AppBarTheme(
         backgroundColor: primaryColor,
         elevation: 0,
         iconTheme: IconThemeData(color: accentColor),
       ),
-      bottomNavigationBarTheme: BottomNavigationBarThemeData(
+      bottomNavigationBarTheme: const BottomNavigationBarThemeData(
         backgroundColor: primaryColor,
         selectedItemColor: accentColor,
         unselectedItemColor: shadowDarkColor,
         elevation: 10,
       ),
-      progressIndicatorTheme: ProgressIndicatorThemeData(
+      progressIndicatorTheme: const ProgressIndicatorThemeData(
         color: accentColor,
         circularTrackColor: shadowDarkColor,
       ),

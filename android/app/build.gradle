@@ -64,4 +64,14 @@ flutter {
     source '../..'
 }
 
-dependencies {}
+dependencies {
+    // 他の依存関係
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation 'androidx.annotation:annotation:1.7.1'
+    
+    // integration_test 用の依存関係を追加
+    androidTestImplementation 'androidx.test:runner:1.4.0'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
+    androidTestImplementation 'androidx.test:rules:1.4.0'
+    debugImplementation 'androidx.test:monitor:1.4.0'
+}

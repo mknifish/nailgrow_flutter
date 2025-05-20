@@ -5,13 +5,18 @@ import 'package:nailgrow_mobile_app_dev/screens/notifications_screen.dart';
 import 'package:nailgrow_mobile_app_dev/screens/test_data_screen.dart';
 
 class CustomDrawer extends StatelessWidget {
+  const CustomDrawer({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Drawer(
       child: ListView(
         padding: EdgeInsets.zero,
         children: <Widget>[
-          DrawerHeader(
+          const DrawerHeader(
+            decoration: BoxDecoration(
+              color: Colors.blue,
+            ),
             child: Row(
               children: [
                 Icon(Icons.settings, color: Colors.white),
@@ -22,13 +27,10 @@ class CustomDrawer extends StatelessWidget {
                 ),
               ],
             ),
-            decoration: BoxDecoration(
-              color: Colors.blue,
-            ),
           ),
           ListTile(
-            leading: Icon(Icons.person),
-            title: Text('プロフィールを編集する'),
+            leading: const Icon(Icons.person),
+            title: const Text('プロフィールを編集する'),
             onTap: () {
               Navigator.pop(context);
               Navigator.push(
@@ -38,8 +40,8 @@ class CustomDrawer extends StatelessWidget {
             },
           ),
           ListTile(
-            leading: Icon(Icons.flag),
-            title: Text('目標値を設定する'),
+            leading: const Icon(Icons.flag),
+            title: const Text('目標値を設定する'),
             onTap: () {
               Navigator.pop(context);
               Navigator.push(
@@ -49,8 +51,8 @@ class CustomDrawer extends StatelessWidget {
             },
           ),
           ListTile(
-            leading: Icon(Icons.notifications),
-            title: Text('お知らせを見る'),
+            leading: const Icon(Icons.notifications),
+            title: const Text('お知らせを見る'),
             onTap: () {
               Navigator.pop(context);
               Navigator.push(
@@ -60,8 +62,8 @@ class CustomDrawer extends StatelessWidget {
             },
           ),
           ListTile(
-            leading: Icon(Icons.settings), // 適切なアイコンを使用
-            title: Text('テストデータ'),
+            leading: const Icon(Icons.settings), // 適切なアイコンを使用
+            title: const Text('テストデータ'),
             onTap: () {
               Navigator.pop(context);
               Navigator.push(

@@ -40,7 +40,7 @@ dependencies:
   cupertino_icons: ^1.0.2
   firebase_core: ^2.25.4
   firebase_analytics: ^10.8.5
-  flutter_local_notifications: ^17.2.1+1
+  flutter_local_notifications: ^16.3.0
   shared_preferences: ^2.2.3
 
 dev_dependencies:
@@ -50,6 +50,8 @@ dev_dependencies:
   # 20240711_追加
   flutter_native_splash: ^2.1.0
   # 20240711_追加
+  integration_test:
+    sdk: flutter
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is

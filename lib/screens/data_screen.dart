@@ -4,6 +4,8 @@ import 'package:nailgrow_mobile_app_dev/state/data_provider.dart';
 import 'set_goal_screen.dart';
 
 class DataScreen extends StatelessWidget {
+  const DataScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -19,7 +21,7 @@ class DataScreen extends StatelessWidget {
       child: Consumer<DataProvider>(
         builder: (context, dataProvider, child) {
           return Scaffold(
-            backgroundColor: Color(0xFFFFCDC5),
+            backgroundColor: const Color(0xFFFFCDC5),
             body: SafeArea(
               child: Column(
                 children: [
@@ -27,19 +29,19 @@ class DataScreen extends StatelessWidget {
                   Expanded(
                     child: Container(
                       width: MediaQuery.of(context).size.width,
-                      color: Color(0xFFFFCDC5),
+                      color: const Color(0xFFFFCDC5),
                       padding: EdgeInsets.symmetric(
                         horizontal: MediaQuery.of(context).size.width * 0.05,
                       ),
                       child: SingleChildScrollView(
-                        child: Container(
+                        child: SizedBox(
                           width: MediaQuery.of(context).size.width * 0.9,
                           child: Wrap(
                             alignment: WrapAlignment.start,
                             spacing: 0.0,
                             runSpacing: MediaQuery.of(context).size.height * 0.025,
                             children: List.generate(dataProvider.achievedGoals, (index) {
-                              return Container(
+                              return SizedBox(
                                 width: (MediaQuery.of(context).size.width * 0.9) / 5,
                                 child: Image.asset(
                                   'assets/img/icon_white.png',
@@ -56,7 +58,7 @@ class DataScreen extends StatelessWidget {
                   // テキスト表示領域（固定）
                   Container(
                     width: MediaQuery.of(context).size.width,
-                    color: Color(0xFFFFCDC5),
+                    color: const Color(0xFFFFCDC5),
                     padding: EdgeInsets.only(
                       bottom: MediaQuery.of(context).size.height * 0.08,
                       top: 20
@@ -67,7 +69,7 @@ class DataScreen extends StatelessWidget {
                         text: TextSpan(
                           style: TextStyle(fontSize: 20, color: Colors.grey[700]),
                           children: <TextSpan>[
-                            TextSpan(text: 'これまで'),
+                            const TextSpan(text: 'これまで'),
                             TextSpan(
                               text: '${dataProvider.achievedGoals}',
                               style: TextStyle(
@@ -76,7 +78,7 @@ class DataScreen extends StatelessWidget {
                                 color:Colors.grey[700],
                               ),
                             ),
-                            TextSpan(text: ' 回達成！'),
+                            const TextSpan(text: ' 回達成！'),
                           ],
                         ),
                       ),

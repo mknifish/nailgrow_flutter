@@ -9,7 +9,7 @@ import 'package:nailgrow_mobile_app_dev/theme.dart'; // テーマをインポー
 class MyHomePage extends StatefulWidget {
   final int initialIndex;
 
-  MyHomePage({this.initialIndex = 0, Key? key}) : super(key: key);
+  const MyHomePage({this.initialIndex = 0, Key? key}) : super(key: key);
 
   @override
   _MyHomePageState createState() => _MyHomePageState();
@@ -41,21 +41,21 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: _currentIndex == 1 ? Color(0xFFFFCDC5) : AppTheme.primaryColor,
+        backgroundColor: _currentIndex == 1 ? const Color(0xFFFFCDC5) : AppTheme.primaryColor,
       ),
       body: _pages[_currentIndex],
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _currentIndex,
         onTap: _onTabTapped,
-        backgroundColor: _currentIndex == 1 ? Color(0xFFFFCDC5) : AppTheme.primaryColor,
-        selectedItemColor: _currentIndex == 1 ? Color(0xFFE0E5EC) : AppTheme.accentColor,
+        backgroundColor: _currentIndex == 1 ? const Color(0xFFFFCDC5) : AppTheme.primaryColor,
+        selectedItemColor: _currentIndex == 1 ? const Color(0xFFE0E5EC) : AppTheme.accentColor,
         unselectedItemColor: const Color(0xFFB0BEC5),
         items: [
           BottomNavigationBarItem(
             icon: Icon(
               Icons.data_usage,
               size: 48,
-              color: _currentIndex == 0 ? Color(0xFFF09182) : AppTheme.shadowDarkColor,
+              color: _currentIndex == 0 ? const Color(0xFFF09182) : AppTheme.shadowDarkColor,
             ),
             label: '',
           ),
@@ -78,20 +78,20 @@ class _MyHomePageState extends State<MyHomePage> {
         child: ListView(
           padding: EdgeInsets.zero,
           children: <Widget>[
-            DrawerHeader(
+            const DrawerHeader(
+              decoration: BoxDecoration(
+                color: AppTheme.primaryColor, // テーマの色を使用
+              ),
               child: Row(
                 children: [
                   Icon(Icons.settings, color: Colors.white),
                   SizedBox(width: 10),
                 ],
               ),
-              decoration: BoxDecoration(
-                color: AppTheme.primaryColor, // テーマの色を使用
-              ),
             ),
             ListTile(
-              leading: Icon(Icons.flag),
-              title: Text('目標値を設定する'),
+              leading: const Icon(Icons.flag),
+              title: const Text('目標値を設定する'),
               onTap: () {
                 Navigator.pop(context);
                 Navigator.push(
@@ -101,8 +101,8 @@ class _MyHomePageState extends State<MyHomePage> {
               },
             ),
             ListTile(
-              leading: Icon(Icons.notifications),
-              title: Text('お知らせを見る'),
+              leading: const Icon(Icons.notifications),
+              title: const Text('お知らせを見る'),
               onTap: () {
                 Navigator.pop(context);
                 Navigator.push(
@@ -112,8 +112,8 @@ class _MyHomePageState extends State<MyHomePage> {
               },
             ),
             ListTile(
-              leading: Icon(Icons.settings),
-              title: Text('テストデータ'),
+              leading: const Icon(Icons.settings),
+              title: const Text('テストデータ'),
               onTap: () {
                 Navigator.pop(context);
                 Navigator.push(

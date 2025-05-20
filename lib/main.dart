@@ -16,6 +16,8 @@ void main() async {
 }
 
 class AppWrapper extends StatefulWidget {
+  const AppWrapper({super.key});
+
   @override
   _AppWrapperState createState() => _AppWrapperState();
 }
@@ -30,7 +32,7 @@ class _AppWrapperState extends State<AppWrapper> {
     _printSharedPreferences();
 
     // 表示時間を1秒に短縮
-    Future.delayed(Duration(seconds: 1), () {
+    Future.delayed(const Duration(seconds: 1), () {
       setState(() {
         _showSplashScreen = false;
       });

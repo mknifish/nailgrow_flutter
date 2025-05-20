@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class TestDataScreen extends StatefulWidget {
+  const TestDataScreen({super.key});
+
   @override
   _TestDataScreenState createState() => _TestDataScreenState();
 }
@@ -10,8 +12,8 @@ class _TestDataScreenState extends State<TestDataScreen> {
   Map<String, dynamic> preferences = {};
   final List<int> dropdownValues = [10, 20, 30, 40, 50]; // 例としてのドロップダウンの値
   final List<DateTime> goalSetDateOptions = [
-    DateTime.now().subtract(Duration(days: 20)),
-    DateTime.now().subtract(Duration(days: 2))
+    DateTime.now().subtract(const Duration(days: 20)),
+    DateTime.now().subtract(const Duration(days: 2))
   ];
 
   @override
@@ -38,17 +40,17 @@ class _TestDataScreenState extends State<TestDataScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('テストデータ'),
+        title: const Text('テストデータ'),
       ),
       body: preferences.isEmpty
-          ? Center(child: CircularProgressIndicator())
+          ? const Center(child: CircularProgressIndicator())
           : ListView(
               padding: const EdgeInsets.all(16.0),
               children: [
                 ...preferences.entries.map((entry) {
                   return _buildPreferenceRow(entry.key, entry.value);
                 }).toList(),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 _buildCurrentSettings(),
               ],
             ),
@@ -108,15 +110,15 @@ class _TestDataScreenState extends State<TestDataScreen> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
+        const Text(
           'Current Settings:',
           style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
         ),
-        SizedBox(height: 10),
+        const SizedBox(height: 10),
         ...preferences.entries.map((entry) {
           return Text(
             '${entry.key}: ${entry.value != null ? entry.value.toString() : 'NULL'}',
-            style: TextStyle(fontSize: 16),
+            style: const TextStyle(fontSize: 16),
           );
         }).toList(),
       ],

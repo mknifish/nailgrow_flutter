@@ -5,12 +5,13 @@ import 'package:nailgrow_mobile_app_dev/screens/my_home_page.dart';
 
 // 紹介画面のクラス
 class TutorialIntroScreen extends StatelessWidget {
-  final PreferencesService _preferencesService = PreferencesService();
+  const TutorialIntroScreen({super.key});
+
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFFFFCDC5), // 背景色
+      backgroundColor: const Color(0xFFFFCDC5), // 背景色
       body: GestureDetector(
         behavior: HitTestBehavior.opaque, // 画面全体をタップ可能に
         onTap: () {
@@ -33,7 +34,7 @@ class TutorialIntroScreen extends StatelessWidget {
                 ),
                 textAlign: TextAlign.center,
               ),
-              SizedBox(height: 8), // テキスト間の余白
+              const SizedBox(height: 8), // テキスト間の余白
               Text(
                 'まずは使い方をご説明します。',
                 style: TextStyle(
@@ -65,6 +66,8 @@ class TutorialStep {
 
 // HomeScreenの上にオーバーレイを表示するチュートリアル画面
 class TutorialHomeScreen extends StatefulWidget {
+  const TutorialHomeScreen({super.key});
+
   @override
   _TutorialHomeScreenState createState() => _TutorialHomeScreenState();
 }
@@ -137,7 +140,7 @@ class _TutorialHomeScreenState extends State<TutorialHomeScreen> {
       left: 20,
       right: 20,
       child: Container(
-        padding: EdgeInsets.symmetric(vertical: 10, horizontal: 15),
+        padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(10),
@@ -162,11 +165,11 @@ class _TutorialHomeScreenState extends State<TutorialHomeScreen> {
       right: 30,
       child: Container(
         height: 250,
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           color: Color(0xFFE0E5EC),
           shape: BoxShape.circle,
         ),
-        child: Center(
+        child: const Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -267,7 +270,7 @@ class _TutorialHomeScreenState extends State<TutorialHomeScreen> {
           child: Container(
             width: 60,
             height: 60,
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               color: Color(0xFFE0E5EC),
               shape: BoxShape.circle,
             ),
@@ -301,11 +304,11 @@ class _TutorialHomeScreenState extends State<TutorialHomeScreen> {
           child: Container(
             width: 90,
             height: 90,
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               color: Color(0xFFE0E5EC),
               shape: BoxShape.circle,
             ),
-            child: Center(
+            child: const Center(
               child: Text(
                 'WIN',
                 style: TextStyle(
@@ -325,7 +328,7 @@ class _TutorialHomeScreenState extends State<TutorialHomeScreen> {
           child: Container(
             width: 90,
             height: 90,
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               color: Color(0xFFE0E5EC),
               shape: BoxShape.circle,
             ),
@@ -361,7 +364,7 @@ class _TutorialHomeScreenState extends State<TutorialHomeScreen> {
     switch (direction) {
       case TriangleDirection.topRight:
         triangle = Container(
-          margin: EdgeInsets.only(right: 20),
+          margin: const EdgeInsets.only(right: 20),
           width: 10,
           height: 10,
           child: CustomPaint(
@@ -372,7 +375,7 @@ class _TutorialHomeScreenState extends State<TutorialHomeScreen> {
         break;
       case TriangleDirection.topLeft:
         triangle = Container(
-          margin: EdgeInsets.only(left: 20),
+          margin: const EdgeInsets.only(left: 20),
           width: 20,
           height: 15,
           child: CustomPaint(
@@ -383,7 +386,7 @@ class _TutorialHomeScreenState extends State<TutorialHomeScreen> {
         break;
       case TriangleDirection.bottomLeft:
         triangle = Container(
-          margin: EdgeInsets.only(left: 20),
+          margin: const EdgeInsets.only(left: 20),
           width: 15,
           height: 10,
           child: CustomPaint(
@@ -394,7 +397,7 @@ class _TutorialHomeScreenState extends State<TutorialHomeScreen> {
         break;
       case TriangleDirection.bottomRight:
         triangle = Container(
-          margin: EdgeInsets.only(right: 50),
+          margin: const EdgeInsets.only(right: 50),
           width: 15,
           height: 10,
           child: CustomPaint(
@@ -412,7 +415,7 @@ class _TutorialHomeScreenState extends State<TutorialHomeScreen> {
       columnChildren.add(
         Container(
           width: 300,
-          padding: EdgeInsets.all(16),
+          padding: const EdgeInsets.all(16),
           decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.circular(10),
@@ -430,7 +433,7 @@ class _TutorialHomeScreenState extends State<TutorialHomeScreen> {
       columnChildren.add(
         Container(
           width: 300,
-          padding: EdgeInsets.all(16),
+          padding: const EdgeInsets.all(16),
           decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.circular(10),
@@ -503,6 +506,8 @@ enum TriangleDirection { topLeft, topRight, bottomLeft, bottomRight }
 class TutorialScreen extends StatelessWidget {
   final PreferencesService _preferencesService = PreferencesService();
 
+  TutorialScreen({super.key});
+
   Future<void> _completeTutorial(BuildContext context) async {
     await _preferencesService.setTutorialCompleted();
     Navigator.pushReplacement(
@@ -514,7 +519,7 @@ class TutorialScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFFFFCDC5),
+      backgroundColor: const Color(0xFFFFCDC5),
       body: GestureDetector(
         behavior: HitTestBehavior.opaque,
         onTap: () => _completeTutorial(context),

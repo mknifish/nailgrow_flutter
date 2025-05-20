@@ -5,7 +5,7 @@ import 'my_home_page.dart';
 class SetGoalScreen extends StatefulWidget {
   final bool isFirstTime;
 
-  SetGoalScreen({required this.isFirstTime});
+  const SetGoalScreen({super.key, required this.isFirstTime});
 
   @override
   _SetGoalScreenState createState() => _SetGoalScreenState();
@@ -17,14 +17,14 @@ class _SetGoalScreenState extends State<SetGoalScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFFE0E5EC),
+      backgroundColor: const Color(0xFFE0E5EC),
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 40.0),
           child: Column(
             children: [
               SizedBox(height: MediaQuery.of(context).size.height * 0.15),
-              Text(
+              const Text(
                 '今回はどのくらい爪を伸ばしますか？',
                 style: TextStyle(
                   fontSize: 18,
@@ -66,19 +66,19 @@ class _SetGoalScreenState extends State<SetGoalScreen> {
     return Center(
       child: Container(
         width: 300,
-        padding: EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
         decoration: BoxDecoration(
-          color: Color(0xFFE0E5EC),
+          color: const Color(0xFFE0E5EC),
           borderRadius: BorderRadius.circular(30),
           boxShadow: [
-            BoxShadow(
+            const BoxShadow(
               color: Colors.white,
               offset: Offset(-3, -3),
               blurRadius: 6,
             ),
             BoxShadow(
               color: Colors.black.withOpacity(0.1),
-              offset: Offset(3, 3),
+              offset: const Offset(3, 3),
               blurRadius: 6,
             ),
           ],
@@ -93,14 +93,14 @@ class _SetGoalScreenState extends State<SetGoalScreen> {
               children: [
                 Text(
                   '$targetLength',
-                  style: TextStyle(
+                  style: const TextStyle(
                     color: Color.fromRGBO(120, 124, 130, 1),
                     fontSize: 72,
                     fontWeight: FontWeight.w500,
                   ),
                 ),
-                SizedBox(width: 10),
-                Text(
+                const SizedBox(width: 10),
+                const Text(
                   'mm',
                   style: TextStyle(
                     color: Color.fromRGBO(120, 124, 130, 0.7),
@@ -110,7 +110,7 @@ class _SetGoalScreenState extends State<SetGoalScreen> {
                 ),
               ],
             ),
-            Positioned(
+            const Positioned(
               right: 0,
               child: Icon(
                 Icons.arrow_drop_down,
@@ -121,9 +121,9 @@ class _SetGoalScreenState extends State<SetGoalScreen> {
             Positioned.fill(
               child: Theme(
                 data: Theme.of(context).copyWith(
-                  canvasColor: Color(0xFFF5F9FC),
+                  canvasColor: const Color(0xFFF5F9FC),
                   shadowColor: Colors.transparent,
-                  highlightColor: Color(0xFFE0E5EC).withOpacity(0.3),
+                  highlightColor: const Color(0xFFE0E5EC).withOpacity(0.3),
                   dividerColor: Colors.transparent,
                   popupMenuTheme: PopupMenuThemeData(
                     elevation: 8,
@@ -134,14 +134,14 @@ class _SetGoalScreenState extends State<SetGoalScreen> {
                 ),
                 child: DropdownButton<int>(
                   value: targetLength,
-                  icon: SizedBox.shrink(), // アイコンを非表示にする
+                  icon: const SizedBox.shrink(), // アイコンを非表示にする
                   elevation: 8,
                   underline: Container(height: 0),
                   isExpanded: true,
                   itemHeight: 70,
                   alignment: Alignment.center,
-                  dropdownColor: Color(0xFFF5F9FC),
-                  style: TextStyle(
+                  dropdownColor: const Color(0xFFF5F9FC),
+                  style: const TextStyle(
                     color: Color.fromRGBO(120, 124, 130, 1),
                     fontSize: 36,
                     fontWeight: FontWeight.w500,
@@ -151,8 +151,8 @@ class _SetGoalScreenState extends State<SetGoalScreen> {
                       value: value,
                       alignment: Alignment.center,
                       child: Container(
-                        padding: EdgeInsets.symmetric(vertical: 10),
-                        decoration: BoxDecoration(
+                        padding: const EdgeInsets.symmetric(vertical: 10),
+                        decoration: const BoxDecoration(
                           border: Border(
                             bottom: BorderSide(
                               color: Color(0xFFE0E5EC),
@@ -171,16 +171,16 @@ class _SetGoalScreenState extends State<SetGoalScreen> {
                               style: TextStyle(
                                 fontSize: 40,
                                 fontWeight: value == targetLength ? FontWeight.bold : FontWeight.w400,
-                                color: Color.fromRGBO(120, 124, 130, 1),
+                                color: const Color.fromRGBO(120, 124, 130, 1),
                               ),
                             ),
-                            SizedBox(width: 8),
+                            const SizedBox(width: 8),
                             Text(
                               'mm',
                               style: TextStyle(
                                 fontSize: 20,
                                 fontWeight: value == targetLength ? FontWeight.bold : FontWeight.w400,
-                                color: Color.fromRGBO(120, 124, 130, 0.7),
+                                color: const Color.fromRGBO(120, 124, 130, 0.7),
                               ),
                             ),
                           ],
@@ -218,17 +218,17 @@ class _SetGoalScreenState extends State<SetGoalScreen> {
           width: 150,
           height: 150,
           decoration: BoxDecoration(
-            color: Color(0xFFE0E5EC),
+            color: const Color(0xFFE0E5EC),
             shape: BoxShape.circle,
             boxShadow: [
-              BoxShadow(
+              const BoxShadow(
                 color: Colors.white,
                 offset: Offset(-4, -4),
                 blurRadius: 8,
               ),
               BoxShadow(
                 color: Colors.black.withOpacity(0.1),
-                offset: Offset(4, 4),
+                offset: const Offset(4, 4),
                 blurRadius: 8,
               ),
             ],
@@ -236,7 +236,7 @@ class _SetGoalScreenState extends State<SetGoalScreen> {
           child: Center(
             child: Text(
               label,
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 28,
                 fontWeight: FontWeight.bold,
                 color: Color.fromRGBO(120, 124, 130, 1),

@@ -8,6 +8,8 @@ import 'package:nailgrow_mobile_app_dev/theme.dart'; // テーマをインポー
 class MyApp extends StatelessWidget {
   final PreferencesService _preferencesService = PreferencesService();
 
+  MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<bool>(
@@ -16,14 +18,14 @@ class MyApp extends StatelessWidget {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return MaterialApp(
             theme: AppTheme.theme, // テーマを適用
-            home: Scaffold(
+            home: const Scaffold(
               body: Center(child: CircularProgressIndicator()),
             ),
           );
         } else {
           return MaterialApp(
             theme: AppTheme.theme, // テーマを適用
-            home: snapshot.data == true ? MyHomePage() : TutorialScreen(), // ここで表示を切り替えています
+            home: snapshot.data == true ? MyHomePage() : TutorialIntroScreen(), // TutorialIntroScreenからスタート
             routes: {
               '/test': (context) => TestDataScreen(),
             },

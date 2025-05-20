@@ -5,6 +5,8 @@ import 'package:nailgrow_mobile_app_dev/state/progress_provider.dart';
 import 'set_goal_screen.dart';
 
 class HomeScreen extends StatefulWidget {
+  const HomeScreen({super.key});
+
   @override
   _HomeScreenState createState() => _HomeScreenState();
 }
@@ -36,7 +38,7 @@ class _HomeScreenState extends State<HomeScreen> {
         double progress = progressProvider.progress.progress;
         int remainingDays = (targetDays ?? 0) - achievedDays;
         return Scaffold(
-          backgroundColor: Color(0xFFE0E5EC),
+          backgroundColor: const Color(0xFFE0E5EC),
           appBar: _buildAppBar(context),
           body: _buildBody(context, progressProvider, progress, remainingDays),
         );
@@ -47,7 +49,7 @@ class _HomeScreenState extends State<HomeScreen> {
   // AppBarのビルド
   PreferredSizeWidget _buildAppBar(BuildContext context) {
     return AppBar(
-      backgroundColor: Color(0xFFE0E5EC),
+      backgroundColor: const Color(0xFFE0E5EC),
       elevation: 0,
       automaticallyImplyLeading: false,
       toolbarHeight: 72,
@@ -80,9 +82,9 @@ class _HomeScreenState extends State<HomeScreen> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             _buildProgressIndicator(progressProvider, progress),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             _buildActionButtons(context, progressProvider),
-            SizedBox(height: 60),
+            const SizedBox(height: 60),
             Text(
               '目標まで${(remainingDays / 10).toStringAsFixed(1)}mm、残り$remainingDays 日です！',
               style: TextStyle(
@@ -104,7 +106,7 @@ class _HomeScreenState extends State<HomeScreen> {
     const double progressStrokeWidth = 33;
     const double innerRadius = 230;
 
-    return Container(
+    return SizedBox(
       width: outerRadius,
       height: outerRadius,
       child: Stack(
@@ -117,7 +119,7 @@ class _HomeScreenState extends State<HomeScreen> {
             child: CustomPaint(
               painter: NeumorphicInsetDonutPainter(
                 thickness: outerStrokeWidth,
-                baseColor: Color(0xFFE0E5EC),
+                baseColor: const Color(0xFFE0E5EC),
                 shadowColor: Colors.black,
                 highlightColor: Colors.white,
               ),
@@ -130,8 +132,8 @@ class _HomeScreenState extends State<HomeScreen> {
             child: CustomPaint(
               painter: GradientProgressPainter(
                 progress: progress.isFinite ? progress : 0.0,
-                backgroundColor: Color(0xFFD1D9E6),
-                gradient: LinearGradient(
+                backgroundColor: const Color(0xFFD1D9E6),
+                gradient: const LinearGradient(
                   colors: [Color.fromARGB(255, 245, 233, 224), Color.fromARGB(255, 241, 168, 165)],
                   begin: Alignment.centerLeft,
                   end: Alignment.centerRight,
@@ -145,17 +147,17 @@ class _HomeScreenState extends State<HomeScreen> {
             width: innerRadius,
             height: innerRadius,
             decoration: BoxDecoration(
-              color: Color(0xFFE0E5EC),
+              color: const Color(0xFFE0E5EC),
               shape: BoxShape.circle,
               boxShadow: [
                 BoxShadow(
                   color: Colors.white.withOpacity(0.8),
-                  offset: Offset(-5, -5),
+                  offset: const Offset(-5, -5),
                   blurRadius: 8,
                 ),
                 BoxShadow(
                   color: Colors.black.withOpacity(0.2),
-                  offset: Offset(5, 5),
+                  offset: const Offset(5, 5),
                   blurRadius: 8,
                 ),
               ],
@@ -166,7 +168,7 @@ class _HomeScreenState extends State<HomeScreen> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text(
+                const Text(
                   'DAY',
                   style: TextStyle(
                     fontSize: 28,
@@ -176,7 +178,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
                 Text(
                   '${progressProvider.progress.achievedDays}',
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 115,
                     fontWeight: FontWeight.bold,
                     color: Color.fromRGBO(120, 124, 130, 1),
@@ -200,9 +202,9 @@ class _HomeScreenState extends State<HomeScreen> {
           onPressed: () async {
             await _homeService.handleWinButtonPressed(context, targetDays, achievedDays);
           },
-          color: Color(0xFFF09182),
+          color: const Color(0xFFF09182),
         ),
-        SizedBox(width: 101),
+        const SizedBox(width: 101),
         _buildNeumorphicButton(
           label: 'LOSE',
           onPressed: () async {
@@ -225,17 +227,17 @@ class _HomeScreenState extends State<HomeScreen> {
         width: 60,
         height: 60,
         decoration: BoxDecoration(
-          color: Color(0xFFE0E5EC),
+          color: const Color(0xFFE0E5EC),
           shape: BoxShape.circle,
           boxShadow: [
-            BoxShadow(
+            const BoxShadow(
               color: Colors.white,
               offset: Offset(-3, -3),
               blurRadius: 6,
             ),
             BoxShadow(
               color: Colors.black.withOpacity(0.2),
-              offset: Offset(3, 3),
+              offset: const Offset(3, 3),
               blurRadius: 6,
             ),
           ],
@@ -263,17 +265,17 @@ class _HomeScreenState extends State<HomeScreen> {
         width: 90,
         height: 90,
         decoration: BoxDecoration(
-          color: Color(0xFFE0E5EC),
+          color: const Color(0xFFE0E5EC),
           shape: BoxShape.circle,
           boxShadow: [
-            BoxShadow(
+            const BoxShadow(
               color: Colors.white,
               offset: Offset(-3, -3),
               blurRadius: 6,
             ),
             BoxShadow(
               color: Colors.black.withOpacity(0.2),
-              offset: Offset(3, 3),
+              offset: const Offset(3, 3),
               blurRadius: 6,
             ),
           ],
@@ -472,7 +474,7 @@ class NeumorphicInsetDonutPainter extends CustomPainter {
     final shadowPaint = Paint()
       ..shader = RadialGradient(
         colors: [shadowColor.withOpacity(0.18), Colors.transparent],
-        stops: [0.7, 1.0],
+        stops: const [0.7, 1.0],
       ).createShader(rect)
       ..style = PaintingStyle.stroke
       ..strokeWidth = thickness;
@@ -481,7 +483,7 @@ class NeumorphicInsetDonutPainter extends CustomPainter {
     final highlightPaint = Paint()
       ..shader = RadialGradient(
         colors: [highlightColor.withOpacity(0.35), Colors.transparent],
-        stops: [0.0, 0.8],
+        stops: const [0.0, 0.8],
       ).createShader(rect)
       ..style = PaintingStyle.stroke
       ..strokeWidth = thickness;

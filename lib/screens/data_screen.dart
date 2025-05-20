@@ -3,14 +3,28 @@ import 'package:provider/provider.dart';
 import 'package:nailgrow_mobile_app_dev/state/data_provider.dart';
 import 'set_goal_screen.dart';
 
-class DataScreen extends StatelessWidget {
+class DataScreen extends StatefulWidget {
   final bool fromAchievement;
   
   const DataScreen({super.key, this.fromAchievement = false});
 
   @override
+  State<DataScreen> createState() => _DataScreenState();
+}
+
+class _DataScreenState extends State<DataScreen> {
+  @override
+  void initState() {
+    super.initState();
+    // 画面表示時に強制的にDataProviderを更新
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      Provider.of<DataProvider>(context, listen: false).loadAchievedGoals();
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return fromAchievement 
+    return widget.fromAchievement 
       ? GestureDetector(
           behavior: HitTestBehavior.opaque,
           onTap: () {

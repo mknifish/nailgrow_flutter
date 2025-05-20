@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:provider/provider.dart';
 import 'package:nailgrow_mobile_app_dev/state/progress_provider.dart';
+import 'package:nailgrow_mobile_app_dev/state/data_provider.dart';
 import 'package:nailgrow_mobile_app_dev/services/home_service.dart';
 import 'package:nailgrow_mobile_app_dev/services/dialog_service.dart';
 import 'package:nailgrow_mobile_app_dev/screens/data_screen.dart';
@@ -140,9 +141,12 @@ class _SetGoalScreenState extends State<SetGoalScreen> {
                         final checkDate = prefs.getString('goalSetDate');
                         print('達成処理後の目標設定日: $checkDate');
                         
-                        // ProgressProviderを更新して達成ダイアログを表示
+                        // Providerを更新して達成ダイアログを表示
                         if (context.mounted) {
+                          // ProgressProviderを更新
                           await Provider.of<ProgressProvider>(context, listen: false).loadProgress();
+                          // DataProviderも更新して達成回数を反映
+                          await Provider.of<DataProvider>(context, listen: false).loadAchievedGoals();
                           
                           // 達成ダイアログを表示
                           await _dialogService.showWinDialog(context, () async {

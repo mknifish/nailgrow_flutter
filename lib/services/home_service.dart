@@ -35,7 +35,7 @@ class HomeService {
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(
-            builder: (context) => const DataScreen(),
+            builder: (context) => const DataScreen(fromAchievement: true),
           ),
         );
       });

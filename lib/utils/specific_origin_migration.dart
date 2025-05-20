@@ -10,6 +10,7 @@ class SpecificOriginMigration {
     BuildContext context, {
     required String url,
     String migrationCompletedKey = 'specific_origin_migration_completed',
+    Function(Map<String, dynamic>)? onDataReceived,
   }) async {
     // 移行が既に完了しているか確認
     final isCompleted = await _isMigrationCompleted(migrationCompletedKey);
@@ -35,8 +36,13 @@ class SpecificOriginMigration {
           // JavaScriptから受け取ったデータを処理
           final data = jsonDecode(message.message) as Map<String, dynamic>;
           
-          // SharedPreferencesに保存
-          await _saveToSharedPreferences(data);
+          // カスタムデータ変換処理が指定されている場合はそれを実行
+          if (onDataReceived != null) {
+            onDataReceived(data);
+          } else {
+            // デフォルトの処理：SharedPreferencesに保存
+            await _saveToSharedPreferences(data);
+          }
           
           // 完了フラグを設定
           final prefs = await SharedPreferences.getInstance();
@@ -181,7 +187,10 @@ class SpecificOriginMigration {
   }
 
   /// 使用例：特定のURLからデータを移行
-  static void showMigrationDialog(BuildContext context) {
+  static void showMigrationDialog(BuildContext context, {
+    required String url,
+    Function(Map<String, dynamic>)? onDataReceived,
+  }) {
     showDialog(
       context: context,
       builder: (context) {
@@ -199,7 +208,8 @@ class SpecificOriginMigration {
                 // 実際のアプリのURLを指定
                 migrateFromSpecificOrigin(
                   context,
-                  url: 'https://your-old-app-url.com',
+                  url: url,
+                  onDataReceived: onDataReceived,
                 );
               },
               child: const Text('移行する'),

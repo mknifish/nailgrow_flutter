@@ -23,8 +23,7 @@ class MyApp extends StatelessWidget {
         } else {
           return MaterialApp(
             theme: AppTheme.theme, // テーマを適用
-            //home: snapshot.data == true ? MyHomePage() : TutorialScreen(),
-            home: TutorialScreen(), // 一時的にチュートリアルを常に表示
+            home: TutorialIntroScreen(), // 一時的にチュートリアル紹介画面を常に表示
             routes: {
               '/test': (context) => TestDataScreen(),
             },

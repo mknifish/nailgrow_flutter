@@ -101,7 +101,7 @@ class _TutorialHomeScreenState extends State<TutorialHomeScreen> {
           // 半透明のグレーオーバーレイ - ステップごとに調整
           Container(
             width: double.infinity,
-            height: _currentStep == 5 ? MediaQuery.of(context).size.height - 70 : double.infinity, // タブ説明時のみ下部を除外
+            height: _currentStep == 5 ? MediaQuery.of(context).size.height - 130 : double.infinity, // タブ説明時のみ下部を除外
             color: Colors.black.withOpacity(0.6),
           ),
           
@@ -133,7 +133,7 @@ class _TutorialHomeScreenState extends State<TutorialHomeScreen> {
   // 目標値と日数の説明用のテキストボックス
   Widget _getInfoTextBox() {
     return Positioned(
-      bottom: 200,
+      bottom: 130,
       left: 20,
       right: 20,
       child: Container(
@@ -157,7 +157,7 @@ class _TutorialHomeScreenState extends State<TutorialHomeScreen> {
   // 連続達成日数の説明用のドーナツ
   Widget _getProgressDonut() {
     return Positioned(
-      top: 150,
+      top: 217,
       left: 30,
       right: 30,
       child: Container(
@@ -296,8 +296,8 @@ class _TutorialHomeScreenState extends State<TutorialHomeScreen> {
       case 2:
         // WINボタンを強調表示
         return Positioned(
-          bottom: 250,
-          left: 80,
+          bottom: 230,
+          left: 55,
           child: Container(
             width: 90,
             height: 90,
@@ -320,8 +320,8 @@ class _TutorialHomeScreenState extends State<TutorialHomeScreen> {
       case 3:
         // LOSEボタンを強調表示
         return Positioned(
-          bottom: 250,
-          right: 80,
+          bottom: 230,
+          right: 55,
           child: Container(
             width: 90,
             height: 90,
@@ -345,27 +345,8 @@ class _TutorialHomeScreenState extends State<TutorialHomeScreen> {
         // 特に強調は不要（ドーナツ自体を表示するため）
         return null;
       case 5:
-        // 右下タブ（爪アイコン）を強調表示
-        return Positioned(
-          bottom: 0,
-          right: 50,
-          child: Container(
-            width: 80,
-            height: 50,
-            decoration: BoxDecoration(
-              color: Color(0xFFE0E5EC),
-              borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(10),
-                topRight: Radius.circular(10),
-              ),
-            ),
-            child: Icon(
-              Icons.view_list,
-              size: 30,
-              color: Color(0xFFF09182),
-            ),
-          ),
-        );
+        // 右下タブ（爪アイコン）の強調表示を削除
+        return null;
       default:
         return null;
     }

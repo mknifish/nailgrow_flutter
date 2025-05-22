@@ -1,0 +1,4 @@
+<application
+        android:name="${applicationName}"
+        android:label="nailgrow"
+        android:icon="@mipmap/ic_launcher"> 

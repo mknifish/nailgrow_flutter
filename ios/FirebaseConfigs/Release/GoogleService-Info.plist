@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>API_KEY</key>
+	<string>AIzaSyCsjlnqPd7kQsYECPbLjcl-C3BcEJ3qges</string>
+	<key>GCM_SENDER_ID</key>
+	<string>1064112709207</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>fish.makanai.nailgrow</string>
+	<key>PROJECT_ID</key>
+	<string>nailgrow-mobile-app</string>
+	<key>STORAGE_BUCKET</key>
+	<string>nailgrow-mobile-app.firebasestorage.app</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:1064112709207:ios:80b02512b7c68177110d12</string>
+</dict>
+</plist>

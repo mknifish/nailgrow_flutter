@@ -155,7 +155,6 @@
 				9CA3D5BFCC01FB3E79120FA1 /* Pods-RunnerTests.release.xcconfig */,
 				E8081FDA47060E54BCE0CBBF /* Pods-RunnerTests.profile.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -202,7 +201,7 @@
 				9705A1C41CF9048500538489 /* Embed Frameworks */,
 				3B06AD1E1E4923F5004D2608 /* Thin Binary */,
 				5BE77CF3E1C60B1B7757EB5B /* [CP] Embed Pods Frameworks */,
-				8F815F322A9220E5007721B2 /* Run Script */,
+				8F815F322A9220E5007721B2 /* Copy GoogleService-Info.plist for Release */,
 			);
 			buildRules = (
 			);
@@ -299,9 +298,13 @@
 			inputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-Runner/Pods-Runner-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
+			inputPaths = (
+			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-Runner/Pods-Runner-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -328,6 +331,21 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		8F815F322A9220E5007721B2 /* Copy GoogleService-Info.plist for Release */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy GoogleService-Info.plist for Release";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if [ \"${CONFIGURATION}\" = \"Release\" ]; then\n  echo \"Copying Release GoogleService-Info.plist\"\n  SOURCE_PLIST=\"${PROJECT_DIR}/FirebaseConfigs/Release/GoogleService-Info.plist\"\n  DESTINATION_PLIST=\"${PROJECT_DIR}/Runner/GoogleService-Info.plist\"\n  cp \"${SOURCE_PLIST}\" \"${DESTINATION_PLIST}\"\nelif [ \"${CONFIGURATION}\" = \"Debug\" ]; then\n  echo \"Copying Debug GoogleService-Info.plist\"\n  SOURCE_PLIST=\"${PROJECT_DIR}/Runner/GoogleService-Info.plist\"\n  DESTINATION_PLIST=\"${PROJECT_DIR}/Runner/GoogleService-Info.plist\"\n  cp \"${SOURCE_PLIST}\" \"${DESTINATION_PLIST}\"\nelse\n  echo \"Using default GoogleService-Info.plist for configuration: ${CONFIGURATION}\"\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		9740EEB61CF901F6004384FC /* Run Script */ = {
@@ -365,21 +383,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		8F815F322A9220E5007721B2 /* Run Script */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Copy GoogleService-Info.plist for Release";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "if [ \"${CONFIGURATION}\" = \"Release\" ]; then\n  echo \"Copying Release GoogleService-Info.plist\"\n  SOURCE_PLIST=\"\${PROJECT_DIR}/FirebaseConfigs/Release/GoogleService-Info.plist\"\n  DESTINATION_PLIST=\"\${PROJECT_DIR}/Runner/GoogleService-Info.plist\"\n  cp \"\${SOURCE_PLIST}\" \"\${DESTINATION_PLIST}\"\nelif [ \"${CONFIGURATION}\" = \"Debug\" ]; then\n  echo \"Copying Debug GoogleService-Info.plist\"\n  SOURCE_PLIST=\"\${PROJECT_DIR}/Runner/GoogleService-Info.plist\"\n  DESTINATION_PLIST=\"\${PROJECT_DIR}/Runner/GoogleService-Info.plist\"\n  cp \"\${SOURCE_PLIST}\" \"\${DESTINATION_PLIST}\"\nelse\n  echo \"Using default GoogleService-Info.plist for configuration: \${CONFIGURATION}\"\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -489,6 +492,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = "$(FLUTTER_BUILD_NUMBER)";
+				DEVELOPMENT_TEAM = 67FXMNJT8N;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = Runner/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -667,6 +671,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = "$(FLUTTER_BUILD_NUMBER)";
+				DEVELOPMENT_TEAM = 67FXMNJT8N;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = Runner/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -689,6 +694,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = "$(FLUTTER_BUILD_NUMBER)";
+				DEVELOPMENT_TEAM = 67FXMNJT8N;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = Runner/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (

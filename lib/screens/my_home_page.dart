@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart'; // kDebugMode を使うために必要
 import 'home_screen.dart';
 import 'data_screen.dart';
 import 'set_goal_screen.dart';
@@ -74,7 +75,7 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
         ],
       ),
-      drawer: Drawer(
+      drawer: kDebugMode ? Drawer(
         child: ListView(
           padding: EdgeInsets.zero,
           children: <Widget>[
@@ -124,7 +125,7 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
           ],
         ),
-      ),
+      ) : null,
     );
   }
 }

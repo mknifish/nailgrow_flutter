@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:nailgrow_mobile_app_dev/services/firebase_service.dart';
 import 'package:nailgrow_mobile_app_dev/my_app.dart';
 import 'package:provider/provider.dart';
 import 'package:nailgrow_mobile_app_dev/state/data_provider.dart';
@@ -7,10 +6,17 @@ import 'package:nailgrow_mobile_app_dev/state/progress_provider.dart';
 import 'package:nailgrow_mobile_app_dev/services/progress_service.dart';
 import 'package:nailgrow_mobile_app_dev/screens/splash_screen.dart'; // スプラッシュスクリーンをインポート
 import 'package:nailgrow_mobile_app_dev/theme.dart'; // テーマをインポート
+import 'package:nailgrow_mobile_app_dev/services/firebase_service.dart'; // Firebaseサービスを再インポート
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await FirebaseService.initializeFirebase();
+  
+  try {
+    await FirebaseService.checkFirebaseStatus();
+    print('Firebase status checked: ${FirebaseService.isInitialized}');
+  } catch (e) {
+    print('Firebase status check error: $e');
+  }
 
   runApp(const AppWrapper());
 }

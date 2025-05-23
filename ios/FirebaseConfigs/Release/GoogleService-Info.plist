@@ -3,17 +3,17 @@
 <plist version="1.0">
 <dict>
 	<key>API_KEY</key>
-	<string>AIzaSyCsjlnqPd7kQsYECPbLjcl-C3BcEJ3qges</string>
+	<string>AIzaSyCUEOhpEBc0CW68VbMLKBQQj2dUvmL6yh4</string>
 	<key>GCM_SENDER_ID</key>
-	<string>1064112709207</string>
+	<string>552156537923</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>fish.makanai.nailgrow</string>
+	<string>com.example.nailgrowMobileAppDev</string>
 	<key>PROJECT_ID</key>
-	<string>nailgrow-mobile-app</string>
+	<string>nailgrow-mobile-app-dev</string>
 	<key>STORAGE_BUCKET</key>
-	<string>nailgrow-mobile-app.firebasestorage.app</string>
+	<string>nailgrow-mobile-app-dev.firebasestorage.app</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -25,6 +25,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:1064112709207:ios:80b02512b7c68177110d12</string>
+	<string>1:552156537923:ios:b7b677b6b9ca1057eae0f6</string>
 </dict>
 </plist>

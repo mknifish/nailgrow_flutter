@@ -1,10 +1,14 @@
 import 'package:firebase_core/firebase_core.dart';
-import 'package:nailgrow_mobile_app_dev/firebase_options.dart';
 
 class FirebaseService {
-  static Future<void> initializeFirebase() async {
-    await Firebase.initializeApp(
-      options: DefaultFirebaseOptions.currentPlatform,
-    );
+  static bool _initialized = false;
+  
+  /// Firebaseの初期化が完了しているかどうかを確認します
+  static bool get isInitialized => _initialized || Firebase.apps.isNotEmpty;
+
+  /// Firebaseのステータスをチェックします（初期化は行いません）
+  static Future<void> checkFirebaseStatus() async {
+    _initialized = Firebase.apps.isNotEmpty;
+    print('Firebase apps count: ${Firebase.apps.length}');
   }
 }

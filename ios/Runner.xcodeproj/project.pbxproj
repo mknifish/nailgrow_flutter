@@ -298,13 +298,9 @@
 			inputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-Runner/Pods-Runner-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
-			inputPaths = (
-			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-Runner/Pods-Runner-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -345,7 +341,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if [ \"${CONFIGURATION}\" = \"Release\" ]; then\n  echo \"Copying Release GoogleService-Info.plist\"\n  SOURCE_PLIST=\"${PROJECT_DIR}/FirebaseConfigs/Release/GoogleService-Info.plist\"\n  DESTINATION_PLIST=\"${PROJECT_DIR}/Runner/GoogleService-Info.plist\"\n  cp \"${SOURCE_PLIST}\" \"${DESTINATION_PLIST}\"\nelif [ \"${CONFIGURATION}\" = \"Debug\" ]; then\n  echo \"Copying Debug GoogleService-Info.plist\"\n  SOURCE_PLIST=\"${PROJECT_DIR}/Runner/GoogleService-Info.plist\"\n  DESTINATION_PLIST=\"${PROJECT_DIR}/Runner/GoogleService-Info.plist\"\n  cp \"${SOURCE_PLIST}\" \"${DESTINATION_PLIST}\"\nelse\n  echo \"Using default GoogleService-Info.plist for configuration: ${CONFIGURATION}\"\nfi\n";
+			shellScript = "if [ \"${CONFIGURATION}\" = \"Release\" ]; then\n  echo \"Copying Release GoogleService-Info.plist\"\n  SOURCE_PLIST=\"${PROJECT_DIR}/FirebaseConfigs/Release/GoogleService-Info.plist\"\n  DESTINATION_PLIST=\"${PROJECT_DIR}/Runner/GoogleService-Info.plist\"\n  cp \"${SOURCE_PLIST}\" \"${DESTINATION_PLIST}\"\nelif [ \"${CONFIGURATION}\" = \"Debug\" ]; then\n  echo \"Using existing GoogleService-Info.plist for Debug\"\nelse\n  echo \"Using default GoogleService-Info.plist for configuration: ${CONFIGURATION}\"\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		9740EEB61CF901F6004384FC /* Run Script */ = {

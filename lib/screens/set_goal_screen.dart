@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:nailgrow_mobile_app_dev/state/progress_provider.dart';
 import 'package:nailgrow_mobile_app_dev/state/data_provider.dart';
 import 'package:nailgrow_mobile_app_dev/services/dialog_service.dart';
+import 'package:nailgrow_mobile_app_dev/services/firebase_service.dart';
 import 'package:nailgrow_mobile_app_dev/screens/data_screen.dart';
 import 'my_home_page.dart';
 
@@ -24,6 +25,13 @@ class SetGoalScreen extends StatefulWidget {
 class _SetGoalScreenState extends State<SetGoalScreen> {
   int targetDays = 1; // 初期目標日数
   final DialogService _dialogService = DialogService();
+
+  @override
+  void initState() {
+    super.initState();
+    // 画面表示イベントを記録
+    FirebaseService.logScreenView('set_goal_screen');
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -55,6 +63,9 @@ class _SetGoalScreenState extends State<SetGoalScreen> {
                     
                     // 1mmあたり10日として計算
                     final newTargetDays = targetDays * 10;
+                    
+                    // Firebase Analyticsに目標設定イベントを記録
+                    await FirebaseService.logGoalSet(newTargetDays);
                     
                     // 現在の設定を取得
                     final oldGoalSetDate = prefs.getString('goalSetDate');

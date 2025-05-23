@@ -6,6 +6,7 @@ import 'package:nailgrow_mobile_app_dev/state/progress_provider.dart'; // Progre
 import 'package:nailgrow_mobile_app_dev/screens/data_screen.dart';
 import 'package:nailgrow_mobile_app_dev/screens/set_goal_screen.dart';
 import 'package:provider/provider.dart';
+import 'package:nailgrow_mobile_app_dev/services/firebase_service.dart'; // Firebase Serviceをインポート
 
 class HomeService {
   final DialogService _dialogService = DialogService();
@@ -22,6 +23,9 @@ class HomeService {
   }
 
   Future<void> handleWinButtonPressed(BuildContext context, int? targetDays, int achievedDays) async {
+    // Firebase Analyticsにイベントを記録
+    await FirebaseService.logWinButtonClick();
+    
     // 最初にGoalSetDateを取得
     DateTime? goalSetDate = await _progressService.preferencesService.getGoalSetDate();
     
@@ -47,6 +51,9 @@ class HomeService {
       // UI更新のためにProviderを再度更新
       Provider.of<ProgressProvider>(context, listen: false).loadProgress();
 
+      // 目標達成イベントをFirebase Analyticsに記録
+      await FirebaseService.logGoalAchieved(targetDays ?? 0);
+
       await _dialogService.showWinDialog(context, () async {
         Navigator.pushReplacement(
           context,
@@ -59,6 +66,9 @@ class HomeService {
   }
 
   Future<void> handleLoseButtonPressed(BuildContext context) async {
+    // Firebase Analyticsにイベントを記録
+    await FirebaseService.logLoseButtonClick();
+    
     await _progressService.resetAchievedDays(context);
     await _dialogService.showLoseDialog(context, () {
       Navigator.pushReplacement(

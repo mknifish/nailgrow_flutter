@@ -14,21 +14,36 @@ import 'firebase_options.dart'; // Firebase設定
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   
+  // Firebase初期化とセットアップ
+  await _initializeFirebase();
+  
+  runApp(const AppWrapper());
+}
+
+/// Firebase初期化とセットアップを行う
+Future<void> _initializeFirebase() async {
   try {
-    // Firebase初期化
-    await Firebase.initializeApp(
-      options: DefaultFirebaseOptions.currentPlatform,
-    );
+    // すでに初期化されているか確認
+    if (Firebase.apps.isEmpty) {
+      // 初期化されていない場合は初期化
+      final app = await Firebase.initializeApp(
+        options: DefaultFirebaseOptions.currentPlatform,
+      );
+      print('Firebase initialized with app: ${app.name}');
+    } else {
+      print('Firebase already initialized, using existing app: ${Firebase.app().name}');
+    }
     
-    // FirebaseServiceのステータスをチェック
+    // FirebaseServiceの状態を更新
     await FirebaseService.checkFirebaseStatus();
-    print('Firebase status checked: ${FirebaseService.isInitialized}');
-    print('Firebase Analytics initialized');
+    
+    // 初期化が完了したか確認
+    final isInitialized = FirebaseService.isInitialized;
+    print('Firebase initialization complete: $isInitialized');
+    
   } catch (e) {
     print('Firebase initialization error: $e');
   }
-
-  runApp(const AppWrapper());
 }
 
 class AppWrapper extends StatefulWidget {
@@ -43,8 +58,22 @@ class _AppWrapperState extends State<AppWrapper> {
   bool _showSplashScreen = true;
   
   // Firebase Analytics インスタンス
-  static FirebaseAnalytics analytics = FirebaseAnalytics.instance;
-  static FirebaseAnalyticsObserver observer = FirebaseAnalyticsObserver(analytics: analytics);
+  static FirebaseAnalytics? _analytics;
+  static FirebaseAnalyticsObserver? _observer;
+  
+  static FirebaseAnalytics get analytics {
+    if (_analytics == null) {
+      _analytics = FirebaseService.analytics;
+    }
+    return _analytics!;
+  }
+  
+  static FirebaseAnalyticsObserver get observer {
+    if (_observer == null) {
+      _observer = FirebaseAnalyticsObserver(analytics: analytics);
+    }
+    return _observer!;
+  }
 
   @override
   void initState() {
@@ -57,8 +86,8 @@ class _AppWrapperState extends State<AppWrapper> {
   // アプリ起動イベントを記録
   Future<void> _logAppOpen() async {
     try {
-      await analytics.logAppOpen();
-      print('App open event logged');
+      await FirebaseService.logEvent(name: 'app_open');
+      print('App open event logged through FirebaseService');
     } catch (e) {
       print('Failed to log app open event: $e');
     }
@@ -83,11 +112,19 @@ class _AppWrapperState extends State<AppWrapper> {
 
   @override
   Widget build(BuildContext context) {
+    // FirebaseAnalyticsObserverのリストを生成（nullセーフに）
+    List<NavigatorObserver> observers = [];
+    try {
+      observers.add(observer);
+    } catch (e) {
+      print('Failed to add observer: $e');
+    }
+    
     if (_showSplashScreen) {
       return MaterialApp(
         theme: AppTheme.theme, // テーマを適用
         home: const SplashScreen(),
-        navigatorObservers: [observer], // Analytics画面トラッキング設定
+        navigatorObservers: observers, // Analytics画面トラッキング設定
       );
     } else {
       return MultiProvider(
@@ -98,7 +135,7 @@ class _AppWrapperState extends State<AppWrapper> {
         child: MaterialApp(
           theme: AppTheme.theme, // テーマを適用
           home: MyApp(),
-          navigatorObservers: [observer], // Analytics画面トラッキング設定
+          navigatorObservers: observers, // Analytics画面トラッキング設定
         ),
       );
     }

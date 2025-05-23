@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:nailgrow_mobile_app_dev/services/home_service.dart';
 import 'package:nailgrow_mobile_app_dev/state/progress_provider.dart';
+import 'package:nailgrow_mobile_app_dev/services/firebase_service.dart';
 import 'set_goal_screen.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -17,6 +18,8 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     super.initState();
+    FirebaseService.logScreenView('home_screen');
+    
     _homeService.loadPreferences(
       onLoaded: (loadedTargetDays, loadedAchievedGoals, loadedAchievedDays) {
         // ここでProgressProviderを更新

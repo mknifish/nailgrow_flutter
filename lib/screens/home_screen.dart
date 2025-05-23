@@ -19,12 +19,8 @@ class _HomeScreenState extends State<HomeScreen> {
     super.initState();
     _homeService.loadPreferences(
       onLoaded: (loadedTargetDays, loadedAchievedGoals, loadedAchievedDays) {
-        // ローカルの状態変数は不要になるため削除
-        // setState(() {
-        //   targetDays = loadedTargetDays;
-        //   achievedGoals = loadedAchievedGoals;
-        //   achievedDays = loadedAchievedDays;
-        // });
+        // ここでProgressProviderを更新
+        Provider.of<ProgressProvider>(context, listen: false).loadProgress();
       },
     );
   }

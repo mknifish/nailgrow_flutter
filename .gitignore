@@ -31,4 +31,5 @@ android/app/google-services.json
 ios/Runner/GoogleService-Info.plist
 macos/Runner/GoogleService-Info.plist
 lib/firebase_options.dart
-ios/FirebaseConfigs/Release/GoogleService-Info.plist # <-- この行を追加
+ios/FirebaseConfigs/Release/GoogleService-Info.plist
+ios/FirebaseConfigs/Debug/GoogleService-Info.plist
